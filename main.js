@@ -5,31 +5,17 @@
 'use strict';
 
 let max = new Coder("Максим", 500, "C++", "C#", "JavaScript");
-max.say_hi();
-max.come_to_office();
-max.drink("кофе");
-max.laugh();
-max.code();
-max.code();
-max.read_documentation();
-max.code();
-max.say_hi();
-max.go_home();
 
-let sasha = new Tester("Саша", 300);
-sasha.say_hi();
-sasha.come_to_office();
-sasha.drink("водку \"Финляндия\"");
-sasha.test("вручную");
-sasha.test("вручную");
-sasha.test("вручную");
-sasha.test("автотесты");
-sasha.say_hi();
-sasha.go_home();
+// Почему-то человек приходит в офис, но потом логи переписываются заново.
+do_something(max, 1);
 
-for (let i in sasha) {
-    document.write("sasha[" + i + "] = " + sasha[i] + "<br>");
-}
+setInterval(function () {
+
+    let rand_method = Math.floor(Math.random() * (Object.getOwnPropertyNames(max).length - 2) + 3);
+
+    do_something(max, rand_method);
+
+}, 2000);
 
 // TODO: Каким-то образом регулировать действия сотрудников.
 // Методы должны запускаться в случайном порядке, но ограничиваться некоторыми правилами,

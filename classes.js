@@ -5,42 +5,59 @@
 class Human {
 
     constructor(name, skill) {
-        this.name = name;
-        this.skill = skill;
-        this.specialty = "";
-        this.cheerfulness = 25;
-    }
+        // Параметры упакованы в отдельный объект, чтобы с помощью Object.getOwnPropertyNames()
+        // было проще получать названия методов в виде массива, что необходимо для выполнения
+        // методов в случайном порядке.
+        // Таким образом, мы просто перечисляем свойства объекта не с нуля, что захватывало бы this.params,
+        // а с единицы. Также появляется возможность присвоить фиксированные порядковые номера методам,
+        // требующим "особого отношения" (таких, например, как this.come_to_office и this.go_home).
+        this.params = {
+            name: name,
+            skill: skill,
+            specialty: "",
+            cheerfulness: 25
+        }
 
-    say_hi() {
-        write_log("Привет, я " + this.specialty + " " + this.name + ", у меня " + this.skill + " очков опыта.");
-    }
+        // 1
+        this.come_to_office = function() {
+            write_log(this.params.name + " пришёл в офис.");
+            this.params.cheerfulness = 50;
+        }
 
-    laugh() {
-        write_log(this.name + " смеётся.");
-        this.cheerfulness++;
-    }
+        // 2
+        this.go_home = function() {
+            write_log(this.params.name + " ушёл домой.");
+        }
 
-    talk() {
-        write_log(this.name + " разговаривает.");
-    }
+        // 3
+        this.drink = function(drink) {
+            write_log(this.params.name + " пьёт " + drink + ".");
+            this.params.cheerfulness++;
+        }
 
-    drink(drink) {
-        write_log(this.name + " пьёт " + drink + ".");
-        this.cheerfulness++;
-    }
+        // 4
+        this.laugh = function() {
+            write_log(this.params.name + " смеётся.");
+            this.params.cheerfulness++;
+        }
 
-    read_documentation() {
-        write_log(this.name + " читает документацию.");
-        this.cheerfulness--;
-    }
+        // 5
+        this.talk = function() {
+            write_log(this.params.name + " разговаривает.");
+        }
 
-    come_to_office() {
-        write_log(this.name + " пришёл в офис.");
-        this.cheerfulness = 50;
-    }
-
-    go_home() {
-        write_log(this.name + " ушёл домой.");
+        // 6
+        this.read_documentation = function() {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " читает документацию.");
+                this.params.cheerfulness--;
+            }
+            else {
+                write_log(this.params.name + " пытается читать документацию, но из-за сильной усталости не может. " +
+                    "Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
     }
 
 }
@@ -49,19 +66,22 @@ class Coder extends Human {
 
     constructor(name, skill, ...language) {
         super(name, skill);
-        this.language = language;
-        this.specialty = "программист";
-    }
+        this.params.language = language;
+        this.params.specialty = "программист";
 
-    code() {
-        if (1 <= this.cheerfulness) {
-            let rand_lang = Math.floor(Math.random() * (this.language.length));
-            write_log(this.name + " программирует на " + this.language[rand_lang] + ".");
-            this.skill++;
-            this.cheerfulness--;
-        } else {
-            write_log(this.name + " пытается программировать, но из-за сильной усталости не может. " +
-                "Надо сделать перерыв.");
+        // 7
+        this.code = function() {
+            if (1 <= this.params.cheerfulness) {
+                let rand_lang = Math.floor(Math.random() * (this.params.language.length));
+                write_log(this.params.name + " программирует на " + this.params.language[rand_lang] + ".");
+                this.params.skill++;
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается программировать, но из-за сильной усталости не может. " +
+                    "Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+
+            }
         }
     }
 
@@ -71,37 +91,53 @@ class Tester extends Human {
 
     constructor(name, skill) {
         super(name, skill);
-        this.specialty = "тестировщик";
-    }
+        this.params.specialty = "тестировщик";
 
-    test(how) {
-        if (1 <= this.cheerfulness) {
-            if ("вручную" == how) {
-                write_log(this.name + " тестирует продукт " + how + ".");
-            } else if ("автотесты" == how) {
-                write_log(this.name + " пишет " + how + ".");
-            }
-            this.skill++;
-            this.cheerfulness--;
-        } else {
-            write_log(this.name + " пытается тестировать продукт, но из-за сильной усталости не может. " +
-                "Надо сделать перерыв.");
-        }
-    }
-
-    make_testing_method() {
-        if (1 <= this.cheerfulness) {
-            if (200 <= this.skill) {
-                write_log(this.name + " разрабатывает новую методику тестирования.");
+        // 7
+        this.test = function(how) {
+            if (1 <= this.params.cheerfulness) {
+                if ("вручную" == how) {
+                    write_log(this.params.name + " тестирует продукт " + how + ".");
+                } else if ("автотесты" == how) {
+                    write_log(this.params.name + " пишет " + how + ".");
+                }
+                this.params.skill++;
+                this.params.cheerfulness--;
             } else {
-                write_log(this.name + " предлагает новую методику тестирования, но она неудачная, так как " +
-                    this.name + " имеет мало опыта.");
-                this.cheerfulness--;
+                write_log(this.params.name + " пытается тестировать продукт, но из-за сильной усталости не может. " +
+                    "Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+
             }
-            this.cheerfulness--;
-        } else {
-            write_log(this.name + " пытается разработать новую методику тестирования, " +
-                "но из-за сильной усталости не может. Надо сделать перерыв.");
+        }
+
+        // 8
+        this.make_testing_method = function() {
+            if (1 <= this.params.cheerfulness) {
+                if (200 <= this.params.skill) {
+                    write_log(this.params.name + " разрабатывает новую методику тестирования.");
+                } else {
+                    write_log(this.params.name + " предлагает новую методику тестирования, но она неудачная, так как " +
+                        this.params.name + " имеет мало опыта.");
+                    this.params.cheerfulness--;
+                }
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается разработать новую методику тестирования, " +
+                    "но из-за сильной усталости не может. Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
+
+        // 9
+        this.make_testbench = function () {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " собирает испытательный стенд.");
+            } else {
+                write_log(this.params.name + " пытается собрать стенд, " +
+                    "но из-за сильной усталости не может. Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
         }
     }
 
@@ -111,16 +147,18 @@ class Techwriter extends Human {
 
     constructor(name, skill) {
         super(name, skill);
-        this.specialty = "технический писатель";
-    }
+        this.params.specialty = "технический писатель";
 
-    write_documentation() {
-        if (1 <= this.cheerfulness) {
-            write_log(this.name + " пишет документацию.");
-            this.cheerfulness--;
-        } else {
-            write_log(this.name + " пытается писать документ, но из-за сильной усталости не может. " +
-                "Надо сделать перерыв.");
+        // 7
+        this.write_documentation = function() {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " пишет документацию.");
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
+                    "Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
         }
     }
 
