@@ -4,7 +4,7 @@
 
 class Human {
 
-    constructor(name, skill) {
+    constructor(name, gender, skill) {
         // Параметры упакованы в отдельный объект, чтобы с помощью Object.getOwnPropertyNames()
         // было проще получать названия методов в виде массива, что необходимо для выполнения
         // методов в случайном порядке.
@@ -13,6 +13,7 @@ class Human {
         // требующим "особого отношения" (таких, например, как this.come_to_office и this.go_home).
         this.params = {
             name: name,
+            gender: gender,
             skill: skill,
             specialty: "",
             cheerfulness: 25
@@ -64,8 +65,8 @@ class Human {
 
 class Coder extends Human {
 
-    constructor(name, skill, ...language) {
-        super(name, skill);
+    constructor(name, gender, skill, ...language) {
+        super(name, gender, skill);
         this.params.language = language;
         this.params.specialty = "программист";
 
@@ -89,8 +90,8 @@ class Coder extends Human {
 
 class Tester extends Human {
 
-    constructor(name, skill) {
-        super(name, skill);
+    constructor(name, gender, skill) {
+        super(name, gender, skill);
         this.params.specialty = "тестировщик";
 
         // 7
@@ -145,8 +146,8 @@ class Tester extends Human {
 
 class Techwriter extends Human {
 
-    constructor(name, skill) {
-        super(name, skill);
+    constructor(name, gender, skill) {
+        super(name, gender, skill);
         this.params.specialty = "технический писатель";
 
         // 7

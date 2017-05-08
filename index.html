@@ -10,17 +10,45 @@
 </head>
 <body>
 
+    Добавить:
+    <form id="choose_human_form">
+        <select id="human_selection">
+            <option id="select_coder">Программист</option>
+            <option id="select_tester">Тестировщик</option>
+            <option id="select_techwriter">Технический писатель</option>
+            <option id="select_designer">Дизайнер</option>
+            <option id="select_manager">Менеджер</option>
+        </select>
+        <input type="submit" value="Выбрать" />
+    </form>
+
     <form id="add_coder_form">
-        Имя: <input type="text" id="coder_name" name="name" /><br>
-        Опыт:  <input type="text" id="coder_skill" name="skill" /><br>
-        Язык:  <input type="text" id="coder_lang" name="lang" /><br>
+        Имя:    <input type="text" id="coder_name" name="name" /><br>
+        Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
+                <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
+        Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
+        Язык:   <input type="text" id="coder_lang" name="lang" /><br>
         <input type="submit" value="Готово" />
     </form>
 
     <script>
         // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
         $('#add_coder_form').submit(function() {
-            add_coder(coders, $('#coder_name').val(), $('#coder_skill').val(), $('#coder_lang').val());
+            let gender_val;
+            if ($("#coder_gender_m").prop("checked")) {
+                gender_val = "m";
+            } else if ($("#coder_gender_f").prop("checked")) {
+                gender_val = "f";
+            }
+            setTimeout(function () {
+                add_human("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
+                    $('#coder_lang').val());
+            }, 1);
+        });
+
+        $('#choose_human_form').submit(function() {
+            alert("Yo");
+            // add_coder(coders, $('#coder_name').val(), $('#coder_skill').val(), $('#coder_lang').val());
         });
     </script>
 
