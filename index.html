@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Coders</title>
+    <link rel="stylesheet" href="reset_CSS.css">
+    <link rel="stylesheet" href="style.css">
     <script src="jquery-3.2.1.min.js"></script>
     <script src="functions.js"></script>
     <script src="classes.js"></script>
@@ -10,46 +12,70 @@
 </head>
 <body>
 
-    Добавить:
-    <form id="choose_human_form">
+    <div id="choose_human_form">
+        <p>Добавьте сотрудника:</p>
         <select id="human_selection">
-            <option id="select_coder">Программист</option>
-            <option id="select_tester">Тестировщик</option>
-            <option id="select_techwriter">Технический писатель</option>
-            <option id="select_designer">Дизайнер</option>
-            <option id="select_manager">Менеджер</option>
+            <option value="coder" id="select_coder">Программист</option>
+            <option value="tester" id="select_tester">Тестировщик</option>
+            <option value="techwriter" id="select_techwriter">Технический писатель</option>
+            <option value="designer" id="select_designer">Дизайнер</option>
+            <option value="manager" id="select_manager">Менеджер</option>
         </select>
-        <input type="submit" value="Выбрать" />
-    </form>
+        <button id="submit_choose_human_form">Выбрать</button>
+    </div>
 
-    <form id="add_coder_form">
+    <div id="add_coder_form">
         Имя:    <input type="text" id="coder_name" name="name" /><br>
         Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
                 <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
         Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
         Язык:   <input type="text" id="coder_lang" name="lang" /><br>
-        <input type="submit" value="Готово" />
-    </form>
+        <button id="submit_add_coder_form">Готово</button>
+    </div>
 
     <script>
         // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
-        $('#add_coder_form').submit(function() {
+        $('#submit_choose_human_form').click(function() {
+            $('#choose_human_form').css("visibility", "hidden");
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
+        });
+
+        $('#submit_add_' + $('#human_selection').val() + '_form').click(function() {
             let gender_val;
-            if ($("#coder_gender_m").prop("checked")) {
+            if ($('#' + $('#human_selection').val() + '_gender_m').prop("checked")) {
                 gender_val = "m";
-            } else if ($("#coder_gender_f").prop("checked")) {
+            } else if ($('#' + $('#human_selection').val() + '_gender_f').prop("checked")) {
                 gender_val = "f";
             }
             setTimeout(function () {
-                add_human("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
-                    $('#coder_lang').val());
+                switch ($('#human_selection').val()) {
+                    case "coder": {
+                        add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
+                            $('#coder_lang').val());
+                        break;
+                    }
+                    case "tester": {
+                        add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
+                        break;
+                    }
+                    case "techwriter": {
+                        add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val,
+                            $('#techwriter_skill').val());
+                        break;
+                    }
+                    case "designer": {
+                        add_human ("designer", designers, $('#designer_name').val(), gender_val,
+                            $('#designer_skill').val());
+                        break;
+                    }
+                    case "manager": {
+                        add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
+                        break;
+                    }
+                }
             }, 1);
         });
 
-        $('#choose_human_form').submit(function() {
-            alert("Yo");
-            // add_coder(coders, $('#coder_name').val(), $('#coder_skill').val(), $('#coder_lang').val());
-        });
     </script>
 
 </body>

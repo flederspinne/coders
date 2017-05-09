@@ -7,6 +7,8 @@
 let coders = [];
 let testers = [];
 let techwriters = [];
+let designers = [];
+let managers = [];
 
 
 // Почему-то человек приходит в офис, но потом логи переписываются заново, это происходит только при вызове
@@ -16,6 +18,8 @@ let techwriters = [];
 // Он действует только на одного человека!!!
 // TODO: Приходить в офис и уходить только один раз.
 let flag_come = false;
+
+let current_human_to_be_created;
 
 // working_day(max);
 // working_day(ksenia);

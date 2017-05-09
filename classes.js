@@ -134,6 +134,7 @@ class Tester extends Human {
         this.make_testbench = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " собирает испытательный стенд.");
+                this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается собрать стенд, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -151,13 +152,58 @@ class Techwriter extends Human {
         this.params.specialty = "технический писатель";
 
         // 7
-        this.write_documentation = function() {
+        this.write_documentation = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " пишет документацию.");
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
+    }
+
+}
+
+class Designer extends Coder {
+
+    constructor(name, gender, skill, ...language) {
+        super(name, gender, skill, ...language);
+        this.params.specialty = "дизайнер";
+
+        // 8
+        this.create_design = function () {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " придумывает дизайн продукта.");
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается придумать дизайн, " +
+                    "но из-за сильной усталости не может. Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
+
+        // 9
+        this.create_UX = function () {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " проектирует взаимодействие с пользователем.");
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается проектировать взаимодействие с пользователем, " +
+                    "но из-за сильной усталости не может. Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
+
+        // 10
+        this.draw = function () {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " рисует.");
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается рисовать, " +
+                    "но из-за сильной усталости не может. Надо сделать перерыв.");
                 do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
             }
         }
