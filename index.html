@@ -29,7 +29,7 @@
         Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
                 <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
         Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
-        Язык:   <input type="text" id="coder_lang" name="lang" /><br>
+        Язык:   <input type="text" id="coder_lang" name="lang" /><button id="add_coder_lang">Ещё язык</button><br>
         <button id="submit_add_coder_form">Готово</button>
     </div>
 
@@ -50,6 +50,8 @@
             setTimeout(function () {
                 switch ($('#human_selection').val()) {
                     case "coder": {
+                        // TODO: Как-то добавлять другие языки программирования. Или забить на это?
+                        let coder_lang_arr = [];
                         add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
                             $('#coder_lang').val());
                         break;
@@ -74,6 +76,10 @@
                     }
                 }
             }, 1);
+        });
+        
+        $('#add_coder_lang').click(function () {
+            $('#coder_lang').after("<input type=\"text\" name=\"lang'\" />");
         });
 
     </script>
