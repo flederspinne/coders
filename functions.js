@@ -66,13 +66,13 @@ function working_day(who) {
     }, 2000);
 }
 
-function add_human(who, where, name, gender, skill, ...language) {
+function add_human(who, where, name, gender, skill, language) {
     if ("coder" == who) {
-        where[where.length] = new Coder(name, gender, skill, ...language);
+        where[where.length] = new Coder(name, gender, skill, language);
     } else if ("tester" == who) {
-        where[where.length] = new Tester(name, gender, skill, ...language);
+        where[where.length] = new Tester(name, gender, skill);
     } else if ("techwriter" == who) {
-        where[where.length] = new Techwriter(name, gender, skill, ...language);
+        where[where.length] = new Techwriter(name, gender, skill);
     }
     alert(JSON.stringify(where[where.length - 1]));
 }

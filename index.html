@@ -12,77 +12,83 @@
 </head>
 <body>
 
-    <div id="choose_human_form">
-        <p>Добавьте сотрудника:</p>
-        <select id="human_selection">
-            <option value="coder" id="select_coder">Программист</option>
-            <option value="tester" id="select_tester">Тестировщик</option>
-            <option value="techwriter" id="select_techwriter">Технический писатель</option>
-            <option value="designer" id="select_designer">Дизайнер</option>
-            <option value="manager" id="select_manager">Менеджер</option>
-        </select>
-        <button id="submit_choose_human_form">Выбрать</button>
-    </div>
+<div id="choose_human_form">
+    <p>Добавьте сотрудника:</p>
+    <select id="human_selection">
+        <option value="coder" id="select_coder">Программист</option>
+        <option value="tester" id="select_tester">Тестировщик</option>
+        <option value="techwriter" id="select_techwriter">Технический писатель</option>
+        <option value="designer" id="select_designer">Дизайнер</option>
+        <option value="manager" id="select_manager">Менеджер</option>
+    </select>
+    <button id="submit_choose_human_form">Выбрать</button>
+</div>
 
-    <div id="add_coder_form">
-        Имя:    <input type="text" id="coder_name" name="name" /><br>
-        Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
-                <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
-        Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
-        Язык:   <input type="text" id="coder_lang" name="lang" /><button id="add_coder_lang">Ещё язык</button><br>
-        <button id="submit_add_coder_form">Готово</button>
-    </div>
+<div id="add_coder_form">
+    Имя:    <input type="text" id="coder_name" name="name" /><br>
+    Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
+    <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
+    Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
+    Язык:   <input type="text" id="coder_lang_0" name="lang" /><button id="add_coder_lang">Ещё язык</button><br>
+    <button id="submit_add_coder_form">Готово</button>
+</div>
 
-    <script>
-        // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
-        $('#submit_choose_human_form').click(function() {
-            $('#choose_human_form').css("visibility", "hidden");
-            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
-        });
+<script>
+    // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
+    $('#submit_choose_human_form').click(function() {
+        $('#choose_human_form').css("visibility", "hidden");
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
+    });
 
-        $('#submit_add_' + $('#human_selection').val() + '_form').click(function() {
-            let gender_val;
-            if ($('#' + $('#human_selection').val() + '_gender_m').prop("checked")) {
-                gender_val = "m";
-            } else if ($('#' + $('#human_selection').val() + '_gender_f').prop("checked")) {
-                gender_val = "f";
-            }
-            setTimeout(function () {
-                switch ($('#human_selection').val()) {
-                    case "coder": {
-                        // TODO: Как-то добавлять другие языки программирования. Или забить на это?
-                        let coder_lang_arr = [];
-                        add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
-                            $('#coder_lang').val());
-                        break;
+    $('#submit_add_' + $('#human_selection').val() + '_form').click(function() {
+        let gender_val;
+        if ($('#' + $('#human_selection').val() + '_gender_m').prop("checked")) {
+            gender_val = "m";
+        } else if ($('#' + $('#human_selection').val() + '_gender_f').prop("checked")) {
+            gender_val = "f";
+        }
+        setTimeout(function () {
+            switch ($('#human_selection').val()) {
+                case "coder": {
+                    let coder_lang_arr = [];
+                    for (let i = 0; i <= coder_lang_index; i++) {
+                        coder_lang_arr[coder_lang_arr.length] = $('#coder_lang_' + i).val();
                     }
-                    case "tester": {
-                        add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
-                        break;
-                    }
-                    case "techwriter": {
-                        add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val,
-                            $('#techwriter_skill').val());
-                        break;
-                    }
-                    case "designer": {
-                        add_human ("designer", designers, $('#designer_name').val(), gender_val,
-                            $('#designer_skill').val());
-                        break;
-                    }
-                    case "manager": {
-                        add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
-                        break;
-                    }
+                    add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
+                        coder_lang_arr);
+                    break;
                 }
-            }, 1);
-        });
-        
-        $('#add_coder_lang').click(function () {
-            $('#coder_lang').after("<input type=\"text\" name=\"lang'\" />");
-        });
+                case "tester": {
+                    add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
+                    break;
+                }
+                case "techwriter": {
+                    add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val,
+                        $('#techwriter_skill').val());
+                    break;
+                }
+                case "designer": {
+                    add_human ("designer", designers, $('#designer_name').val(), gender_val,
+                        $('#designer_skill').val());
+                    break;
+                }
+                case "manager": {
+                    add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
+                    break;
+                }
+            }
+        }, 1);
+    });
 
-    </script>
+    // Индекс каждого нового поля ввода для очередного языка программирования:
+    let coder_lang_index = 0;
+
+    $('#add_coder_lang').click(function () {
+        $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" + (coder_lang_index + 1) +
+            "' name=\"lang'\" />");
+        coder_lang_index++;
+    });
+</script>
 
 </body>
 </html>

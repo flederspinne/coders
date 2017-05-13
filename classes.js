@@ -65,7 +65,7 @@ class Human {
 
 class Coder extends Human {
 
-    constructor(name, gender, skill, ...language) {
+    constructor(name, gender, skill, language) {
         super(name, gender, skill);
         this.params.language = language;
         this.params.specialty = "программист";
@@ -168,8 +168,8 @@ class Techwriter extends Human {
 
 class Designer extends Coder {
 
-    constructor(name, gender, skill, ...language) {
-        super(name, gender, skill, ...language);
+    constructor(name, gender, skill, language) {
+        super(name, gender, skill, language);
         this.params.specialty = "дизайнер";
 
         // 8
