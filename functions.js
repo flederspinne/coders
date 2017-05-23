@@ -90,3 +90,19 @@ function get_gender() {
         gender_val = "f";
     }
 }
+
+function input_fields_width_align() {
+    try {
+        // В IE выравнивание происходит некорректно, отступ слева больше.
+        // Substring нужен для того, чтобы убрать "px" в возвращаемом значении:
+        let info_fields_width = $('.info_fields').css("width").substring(0, $('.info_fields').css("width").length - 2);
+
+        let info_fields_padding = $('.info_fields').css("padding").substring(0, $('.info_fields').css("padding").length - 2);
+        let body_width = $('body').css("width").substring(0, $('body').css("width").length - 2);
+        let info_fields_margin_left = (body_width - info_fields_width - info_fields_padding * 2) / 2;
+
+        $('.info_fields').css("margin-left", info_fields_margin_left + "px");
+    } catch(err) {
+        alert(err);
+    }
+}

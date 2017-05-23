@@ -1,3 +1,14 @@
+*,
+html {
+    color: #3a2223;
+    font: 12pt "Verdana";
+    overflow: hidden;
+}
+
+body {
+    background-image: url("cubic.jpg");
+}
+
 #choose_human_form {
     visibility: visible;
 }
@@ -8,4 +19,24 @@
 #add_designer_form,
 #add_manager_form {
     visibility: hidden;
+}
+
+.info_fields {
+    background: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    margin: 20% 0 0 0;
+    padding: 3%;
+    position: absolute;
+    text-align: left;
+    width: auto;
+}
+
+.field {
+    font-size: 1em;
+}
+
+.text {
+    font-size: 1.4em;
+    margin: 0 0 5% 0;
+    text-align: center;
 }

@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<div id="choose_human_form">
-    <p>Добавьте сотрудника:</p>
-    <select id="human_selection">
+<div id="choose_human_form" class="info_fields">
+    <p class="text">Добавьте сотрудника:</p>
+    <select id="human_selection" class="field">
         <option value="coder" id="select_coder">Программист</option>
         <option value="tester" id="select_tester">Тестировщик</option>
         <option value="techwriter" id="select_techwriter">Технический писатель</option>
@@ -24,7 +24,7 @@
     <button id="submit_choose_human_form">Выбрать</button>
 </div>
 
-<div id="add_coder_form">
+<div id="add_coder_form" class="info_fields">
     Имя:    <input type="text" id="coder_name" name="name" /><br>
     Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
     <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
@@ -33,7 +33,7 @@
     <button id="submit_add_coder_form">Готово</button>
 </div>
 
-<div id="add_tester_form">
+<div id="add_tester_form" class="info_fields">
     Имя:    <input type="text" id="tester_name" name="name" /><br>
     Пол:    <input type="radio" id="tester_gender_m" value="m" name="gender" /> М
     <input type="radio" id="tester_gender_f" value="f" name="gender" /> Ж<br>
@@ -41,7 +41,7 @@
     <button id="submit_add_tester_form">Готово</button>
 </div>
 
-<div id="add_techwriter_form">
+<div id="add_techwriter_form" class="info_fields">
     Имя:    <input type="text" id="techwriter_name" name="name" /><br>
     Пол:    <input type="radio" id="techwriter_gender_m" value="m" name="gender" /> М
     <input type="radio" id="techwriter_gender_f" value="f" name="gender" /> Ж<br>
@@ -49,7 +49,7 @@
     <button id="submit_add_techwriter_form">Готово</button>
 </div>
 
-<div id="add_designer_form">
+<div id="add_designer_form" class="info_fields">
     Имя:    <input type="text" id="designer_name" name="name" /><br>
     Пол:    <input type="radio" id="designer_gender_m" value="m" name="gender" /> М
     <input type="radio" id="designer_gender_f" value="f" name="gender" /> Ж<br>
@@ -58,7 +58,7 @@
     <button id="submit_add_designer_form">Готово</button>
 </div>
 
-<div id="add_manager_form">
+<div id="add_manager_form" class="info_fields">
     Имя:    <input type="text" id="manager_name" name="name" /><br>
     Пол:    <input type="radio" id="manager_gender_m" value="m" name="gender" /> М
     <input type="radio" id="manager_gender_f" value="f" name="gender" /> Ж<br>
@@ -73,6 +73,8 @@
         $('#choose_human_form').css("visibility", "hidden");
         $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
     });
+
+    // -----------------------------------------------------------------------------------------------------------------
 
     $('#submit_add_coder_form').click(function() {
         get_gender();
@@ -114,6 +116,7 @@
         add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
     });
 
+    // -----------------------------------------------------------------------------------------------------------------
 
     $('#add_coder_lang').click(function () {
         $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" + (coder_lang_index + 1) +
@@ -122,9 +125,19 @@
     });
 
     $('#add_designer_lang').click(function () {
-        $('#designer_lang_' + designer_lang_index).after("<br><input type=\"text\" id='designer_lang_" + (designer_lang_index + 1) +
-            "' name=\"lang'\" />");
+        $('#designer_lang_' + designer_lang_index).after("<br><input type=\"text\" id='designer_lang_" +
+            (designer_lang_index + 1) + "' name=\"lang'\" />");
         designer_lang_index++;
+    });
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    $(document).ready(function () {
+        input_fields_width_align();
+    });
+
+    $(window).resize(function () {
+        input_fields_width_align();
     });
 
 </script>
