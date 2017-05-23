@@ -79,6 +79,11 @@ function add_human(who, where, name, gender, skill, language) {
         where[where.length] = new Manager(name, gender, skill);
     }
     alert(JSON.stringify(where[where.length - 1]));
+
+    $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+    $('#wanna_add_another_human').css("visibility", "visible");
+    $('#choose_human_form').css("visibility", "visible");
+    $('#simulation_start').css("visibility", "visible");
 }
 
 function get_gender() {
@@ -95,13 +100,13 @@ function input_fields_width_align() {
     try {
         // В IE выравнивание происходит некорректно, отступ слева больше.
         // Substring нужен для того, чтобы убрать "px" в возвращаемом значении:
-        let info_fields_width = $('.info_fields').css("width").substring(0, $('.info_fields').css("width").length - 2);
+        /* let info_fields_width = $('.info_fields').css("width").substring(0, $('.info_fields').css("width").length - 2);
 
         let info_fields_padding = $('.info_fields').css("padding").substring(0, $('.info_fields').css("padding").length - 2);
         let body_width = $('body').css("width").substring(0, $('body').css("width").length - 2);
         let info_fields_margin_left = (body_width - info_fields_width - info_fields_padding * 2) / 2;
 
-        $('.info_fields').css("margin-left", info_fields_margin_left + "px");
+        $('.info_fields').css("margin-left", info_fields_margin_left + "px"); */
     } catch(err) {
         alert(err);
     }

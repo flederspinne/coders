@@ -13,7 +13,7 @@
 <body>
 
 <div id="choose_human_form" class="info_fields">
-    <p class="text">Добавьте сотрудника:</p>
+    <p class="text_center">Добавьте сотрудника:</p>
     <select id="human_selection" class="field">
         <option value="coder" id="select_coder">Программист</option>
         <option value="tester" id="select_tester">Тестировщик</option>
@@ -25,52 +25,92 @@
 </div>
 
 <div id="add_coder_form" class="info_fields">
-    Имя:    <input type="text" id="coder_name" name="name" /><br>
-    Пол:    <input type="radio" id="coder_gender_m" value="m" name="gender" /> М
-    <input type="radio" id="coder_gender_f" value="f" name="gender" /> Ж<br>
-    Опыт:   <input type="text" id="coder_skill" name="skill" /><br>
-    Язык:   <input type="text" id="coder_lang_0" name="lang" /><button id="add_coder_lang">Ещё язык</button><br>
+    <div class="add_form_group_span">
+        <span class="add_form_text">Имя:</span>
+        <span class="add_form_text">Пол:</span>
+        <span class="add_form_text">Опыт:</span>
+        <span class="add_form_text">Язык:</span>
+    </div>
+
+    <div class="add_form_group_input">
+        <input type="text" id="coder_name" name="name" class="add_form_input"/><br>
+        <input type="radio" id="coder_gender_m" value="m" name="gender" />
+            <span class="add_form_text">М</span>
+        <input type="radio" id="coder_gender_f" value="f" name="gender" />
+            <span class="add_form_text">Ж</span><br>
+        <input type="text" id="coder_skill" name="skill" class="add_form_input"/>
+        <input type="text" id="coder_lang_0" name="lang" class="add_form_input"/>
+        <button id="add_coder_lang">+</button>
+    </div>
+    <br>
     <button id="submit_add_coder_form">Готово</button>
 </div>
 
+<!-- div id="add_coder_form" class="info_fields">
+    <span class="add_form_text">Имя:</span>    <input type="text" id="coder_name" name="name" class="add_form_input"/><br>
+    <span class="add_form_text">Пол:</span>    <input type="radio" id="coder_gender_m" value="m" name="gender" />
+                                            <span class="add_form_text">М</span>
+    <input type="radio" id="coder_gender_f" value="f" name="gender" />
+                                            <span class="add_form_text">Ж</span><br>
+    <span class="add_form_text">Опыт:</span>   <input type="text" id="coder_skill" name="skill" class="add_form_input"/><br>
+    <span class="add_form_text">Язык:</span>   <input type="text" id="coder_lang_0" name="lang" class="add_form_input"/>
+    <button id="add_coder_lang">Ещё язык</button><br>
+    <button id="submit_add_coder_form">Готово</button>
+</div -->
+
 <div id="add_tester_form" class="info_fields">
-    Имя:    <input type="text" id="tester_name" name="name" /><br>
-    Пол:    <input type="radio" id="tester_gender_m" value="m" name="gender" /> М
-    <input type="radio" id="tester_gender_f" value="f" name="gender" /> Ж<br>
-    Опыт:   <input type="text" id="tester_skill" name="skill" /><br>
+    <span class="add_form_text">Имя:</span>    <input type="text" id="tester_name" name="name" /><br>
+    <span class="add_form_text">Пол:</span>    <input type="radio" id="tester_gender_m" value="m" name="gender" />
+                                            <span class="add_form_text">М</span>
+    <input type="radio" id="tester_gender_f" value="f" name="gender" />
+                                            <span class="add_form_text">Ж</span><br>
+    <span class="add_form_text">Опыт:</span>   <input type="text" id="tester_skill" name="skill" /><br>
     <button id="submit_add_tester_form">Готово</button>
 </div>
 
 <div id="add_techwriter_form" class="info_fields">
-    Имя:    <input type="text" id="techwriter_name" name="name" /><br>
-    Пол:    <input type="radio" id="techwriter_gender_m" value="m" name="gender" /> М
-    <input type="radio" id="techwriter_gender_f" value="f" name="gender" /> Ж<br>
-    Опыт:   <input type="text" id="techwriter_skill" name="skill" /><br>
+    <span class="add_form_text">Имя:</span>    <input type="text" id="techwriter_name" name="name" /><br>
+    <span class="add_form_text">Пол:</span>    <input type="radio" id="techwriter_gender_m" value="m" name="gender" />
+                                            <span class="add_form_text">М</span>
+    <input type="radio" id="techwriter_gender_f" value="f" name="gender" />
+                                            <span class="add_form_text">Ж</span><br>
+    <span class="add_form_text">Опыт:</span>   <input type="text" id="techwriter_skill" name="skill" /><br>
     <button id="submit_add_techwriter_form">Готово</button>
 </div>
 
 <div id="add_designer_form" class="info_fields">
-    Имя:    <input type="text" id="designer_name" name="name" /><br>
-    Пол:    <input type="radio" id="designer_gender_m" value="m" name="gender" /> М
-    <input type="radio" id="designer_gender_f" value="f" name="gender" /> Ж<br>
-    Опыт:   <input type="text" id="designer_skill" name="skill" /><br>
-    Язык:   <input type="text" id="designer_lang_0" name="lang" /><button id="add_designer_lang">Ещё язык</button><br>
+    <span class="add_form_text">Имя:</span>    <input type="text" id="designer_name" name="name" /><br>
+    <span class="add_form_text">Пол:</span>    <input type="radio" id="designer_gender_m" value="m" name="gender" />
+                                            <span class="add_form_text">М</span>
+    <input type="radio" id="designer_gender_f" value="f" name="gender" />
+                                            <span class="add_form_text">Ж</span><br>
+    <span class="add_form_text">Опыт:</span>   <input type="text" id="designer_skill" name="skill" /><br>
+    <span class="add_form_text">Язык:</span>   <input type="text" id="designer_lang_0" name="lang" />
+    <button id="add_designer_lang">Ещё язык</button><br>
     <button id="submit_add_designer_form">Готово</button>
 </div>
 
 <div id="add_manager_form" class="info_fields">
-    Имя:    <input type="text" id="manager_name" name="name" /><br>
-    Пол:    <input type="radio" id="manager_gender_m" value="m" name="gender" /> М
-    <input type="radio" id="manager_gender_f" value="f" name="gender" /> Ж<br>
-    Опыт:   <input type="text" id="manager_skill" name="skill" /><br>
+    <span class="add_form_text">Имя:</span>    <input type="text" id="manager_name" name="name" /><br>
+    <span class="add_form_text">Пол:</span>    <input type="radio" id="manager_gender_m" value="m" name="gender" />
+                                            <span class="add_form_text">М</span>
+    <input type="radio" id="manager_gender_f" value="f" name="gender" />
+                                            <span class="add_form_text">Ж</span><br>
+    <span class="add_form_text">Опыт:</span>   <input type="text" id="manager_skill" name="skill" /><br>
     <button id="submit_add_manager_form">Готово</button>
 </div>
+
+<p id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или начать симуляцию?</p>
+
+<button id="simulation_start" class="button button_big">Начать симуляцию</button>
 
 <script>
 
     // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
     $('#submit_choose_human_form').click(function() {
         $('#choose_human_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "hidden");
+        $('#simulation_start').css("visibility", "hidden");
         $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
     });
 

@@ -17,26 +17,70 @@ body {
 #add_tester_form,
 #add_techwriter_form,
 #add_designer_form,
-#add_manager_form {
+#add_manager_form,
+#wanna_add_another_human,
+#simulation_start {
     visibility: hidden;
 }
 
 .info_fields {
     background: white;
     box-shadow: 0 0 8px rgba(0,0,0,0.5);
-    margin: 20% 0 0 0;
+    margin: 20% 0 0 30%;
     padding: 3%;
     position: absolute;
     text-align: left;
-    width: auto;
+    width: 40%;
+}
+
+.add_form_group_span {
+    /* border: 1px solid darkblue; */
+    display: inline-block;
+    position: relative;
+    width: 50px;
+}
+
+.add_form_group_input {
+    /* border: 1px solid darkred; */
+    display: inline-block;
+    position: relative;
+    width: 87%;
 }
 
 .field {
     font-size: 1em;
 }
 
-.text {
+.text_center {
     font-size: 1.4em;
     margin: 0 0 5% 0;
     text-align: center;
+}
+
+.label {
+    margin: 15% 0 0 10%;
+    width: 80%
+}
+
+.button {
+
+}
+
+.button_big {
+    height: 10%;
+    margin: 20% 0 0 40%;
+    position: absolute;
+    width: 20%;
+}
+
+.add_form_text {
+    /* border: 1px solid darkred; */
+    line-height: 30px;
+    position: relative;
+}
+
+.add_form_input {
+    margin: 2.5px;
+    position: relative;
+    width: 88%;
 }
