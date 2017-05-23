@@ -122,6 +122,7 @@ class Tester extends Human {
                         this.params.name + " имеет мало опыта.");
                     this.params.cheerfulness--;
                 }
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается разработать новую методику тестирования, " +
@@ -134,6 +135,7 @@ class Tester extends Human {
         this.make_testbench = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " собирает испытательный стенд.");
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается собрать стенд, " +
@@ -155,6 +157,7 @@ class Techwriter extends Human {
         this.write_documentation = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " пишет документацию.");
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
@@ -176,6 +179,7 @@ class Designer extends Coder {
         this.create_design = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " придумывает дизайн продукта.");
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается придумать дизайн, " +
@@ -188,6 +192,7 @@ class Designer extends Coder {
         this.create_UX = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " проектирует взаимодействие с пользователем.");
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается проектировать взаимодействие с пользователем, " +
@@ -200,10 +205,38 @@ class Designer extends Coder {
         this.draw = function () {
             if (1 <= this.params.cheerfulness) {
                 write_log(this.params.name + " рисует.");
+                this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается рисовать, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
+                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+            }
+        }
+    }
+
+}
+
+class Manager extends Human {
+
+    constructor(name, gender, skill) {
+        super(name, gender, skill);
+        this.params.specialty = "менеджер";
+
+        // 7
+        this.organize_meeting = function () {
+            write_log(this.params.name + " организует совещание.");
+        }
+
+        // 8
+        this.communicate_with_customer = function () {
+            if (1 <= this.params.cheerfulness) {
+                write_log(this.params.name + " общается с заказчиком.");
+                this.params.skill++;
+                this.params.cheerfulness--;
+            } else {
+                write_log(this.params.name + " пытается общаться с заказчиком, " +
+                    "но из-за сильной усталости срывается. Надо сделать перерыв.");
                 do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
             }
         }

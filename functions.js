@@ -73,6 +73,20 @@ function add_human(who, where, name, gender, skill, language) {
         where[where.length] = new Tester(name, gender, skill);
     } else if ("techwriter" == who) {
         where[where.length] = new Techwriter(name, gender, skill);
+    } else if ("designer" == who) {
+        where[where.length] = new Designer(name, gender, skill, language);
+    } else if ("manager" == who) {
+        where[where.length] = new Manager(name, gender, skill);
     }
     alert(JSON.stringify(where[where.length - 1]));
+}
+
+function get_gender() {
+    gender_val = "";
+
+    if ($('#' + $('#human_selection').val() + '_gender_m').prop("checked")) {
+        gender_val = "m";
+    } else if ($('#' + $('#human_selection').val() + '_gender_f').prop("checked")) {
+        gender_val = "f";
+    }
 }

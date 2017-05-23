@@ -2,6 +2,10 @@
     visibility: visible;
 }
 
-#add_coder_form {
+#add_coder_form,
+#add_tester_form,
+#add_techwriter_form,
+#add_designer_form,
+#add_manager_form {
     visibility: hidden;
 }

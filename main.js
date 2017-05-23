@@ -10,6 +10,11 @@ let techwriters = [];
 let designers = [];
 let managers = [];
 
+// Индекс каждого нового поля ввода для очередного языка программирования:
+let coder_lang_index = 0;
+let designer_lang_index = 0;
+// Пол сотрудника, добавляемого в данный момент
+let gender_val = "";
 
 // Почему-то человек приходит в офис, но потом логи переписываются заново, это происходит только при вызове
 // setTimeout и setInterval.
@@ -18,8 +23,6 @@ let managers = [];
 // Он действует только на одного человека!!!
 // TODO: Приходить в офис и уходить только один раз.
 let flag_come = false;
-
-
 
 let current_human_to_be_created;
 
