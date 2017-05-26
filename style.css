@@ -6,7 +6,7 @@ html {
 }
 
 body {
-    background-image: url("cubic.jpg");
+    background-image: url("img/cubic.jpg");
 }
 
 #choose_human_form {
@@ -23,10 +23,14 @@ body {
     visibility: hidden;
 }
 
+input {
+    cursor: pointer;
+}
+
 .info_fields {
     background: white;
     box-shadow: 0 0 8px rgba(0,0,0,0.5);
-    margin: 20% 0 0 30%;
+    margin: 20% 0 0 27%;
     padding: 3%;
     position: absolute;
     text-align: left;
@@ -34,20 +38,22 @@ body {
 }
 
 .add_form_group_span {
-    /* border: 1px solid darkblue; */
-    display: inline-block;
-    position: relative;
+    position: fixed;
     width: 50px;
 }
 
 .add_form_group_input {
-    /* border: 1px solid darkred; */
-    display: inline-block;
+    margin: 0 0 0 60px;
     position: relative;
     width: 87%;
 }
 
+.choose_human_form_input {
+    width: 75%;
+}
+
 .field {
+    cursor: pointer;
     font-size: 1em;
 }
 
@@ -58,12 +64,27 @@ body {
 }
 
 .label {
-    margin: 15% 0 0 10%;
-    width: 80%
+    margin: 15% 0 0 15%;
+    position: relative;
+    text-align: center;
+    width: 70%
 }
 
 .button {
+    background: lightgrey;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    outline: none;
+    width: 23.5%;
+}
 
+.button:hover {
+    background: #af9a9a;
+}
+
+.button:active {
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
 }
 
 .button_big {
@@ -71,6 +92,11 @@ body {
     margin: 20% 0 0 40%;
     position: absolute;
     width: 20%;
+}
+
+#add_coder_lang,
+#add_designer_lang {
+    width: 30px;
 }
 
 .add_form_text {
