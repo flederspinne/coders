@@ -83,7 +83,7 @@ function add_human(who, where, name, gender, skill, language) {
     $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
     $('#wanna_add_another_human').css("visibility", "visible");
     $('#choose_human_form').css("visibility", "visible");
-    $('#simulation_start').css("visibility", "visible");
+    $('#button_settings').css("visibility", "visible");
 }
 
 function get_gender() {

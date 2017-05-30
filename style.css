@@ -19,7 +19,8 @@ body {
 #add_designer_form,
 #add_manager_form,
 #wanna_add_another_human,
-#simulation_start {
+#button_settings,
+#settings_form {
     visibility: hidden;
 }
 

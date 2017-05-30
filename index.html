@@ -124,9 +124,20 @@
     <button id="submit_add_manager_form" class="button">Готово</button>
 </div>
 
-<p id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или начать симуляцию?</p>
+<p id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или перейти к настройкам?</p>
 
-<button id="simulation_start" class="button button_big">Начать симуляцию</button>
+<button id="button_settings" class="button button_big">Настройки</button>
+
+<div id="settings_form">
+    <input id="emergency_checkbox" type="checkbox">
+    <label for="emergency_checkbox">Режим аварии</label>
+    <br>
+    <span class="add_form_text">Время на проект:</span>
+    <input type="text" id="time_for_project_input" class="add_form_input"/>
+    <span class="add_form_text">рабочих дней</span>
+    <br>
+    <button id="button_simulation_start" class="button button_big">Начать симуляцию</button>
+</div>
 
 <script>
 
@@ -134,7 +145,7 @@
     $('#submit_choose_human_form').click(function() {
         $('#choose_human_form').css("visibility", "hidden");
         $('#wanna_add_another_human').css("visibility", "hidden");
-        $('#simulation_start').css("visibility", "hidden");
+        $('#button_settings').css("visibility", "hidden");
         $('#add_' + $('#human_selection').val() + '_form').css("visibility", "visible");
     });
 
@@ -184,8 +195,8 @@
 
     $('#add_coder_lang').click(function () {
         if (coder_lang_index <= 7) {
-            $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" + (coder_lang_index + 1) +
-                "' name=\"lang'\" class=\"add_form_input\"/>");
+            $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" +
+                (coder_lang_index + 1) + "' name=\"lang'\" class=\"add_form_input\"/>");
             coder_lang_index++;
         }
     });
@@ -194,6 +205,15 @@
         $('#designer_lang_' + designer_lang_index).after("<br><input type=\"text\" id='designer_lang_" +
             (designer_lang_index + 1) + "' name=\"lang'\" class=\"add_form_input\"/>");
         designer_lang_index++;
+    });
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    $('#button_settings').click(function () {
+        $('#wanna_add_another_human').css("visibility", "hidden");
+        $('#choose_human_form').css("visibility", "hidden");
+        $('#button_settings').css("visibility", "hidden");
+        $('#settings_form').css("visibility", "visible");
     });
 
     // -----------------------------------------------------------------------------------------------------------------
