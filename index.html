@@ -89,6 +89,7 @@
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
         <span class="add_form_text">Опыт:</span>
+        <span class="add_form_text">Язык:</span>
     </div>
 
     <div class="add_form_group_input">
@@ -144,6 +145,10 @@
 
 <button id="button_simulation_start" class="button button_big">Начать симуляцию</button>
 
+<div id="simulation_screen">
+    <div id="simulation_log"></div>
+</div>
+
 <script>
 
     // Ограничения области видимости не позволяют перенести код в какой-то из модулей.
@@ -198,7 +203,9 @@
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    // TODO: добавить возможность удалять пустые поля, а то добавляются пустые языки
+    // TODO: добавить возможность удалять пустые поля, а то добавляются пустые языки.
+    // TODO: при добавлении следующего программиста остаётся столько же пустых полей
+    // для ввода языков, сколько осталось после предыдущего программиста.
     $('#add_coder_lang').click(function () {
         if (coder_lang_index <= 6) {
             $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" +
@@ -229,7 +236,24 @@
     // -----------------------------------------------------------------------------------------------------------------
 
     $('#button_simulation_start').click(function () {
-        document.location.href = "simulation.html";
+        $('#settings_form').css("visibility", "hidden");
+        $('#button_simulation_start').css("visibility", "hidden");
+        $('#simulation_screen').css("visibility", "visible");
+
+        initialize_day();
+
+        let misha = new Tester("Миша", "m", 1000);
+        // working_day(misha);
+
+        /* let max = new Coder("max", "m", 100, ["C++", "C#"]);
+        let nastya = new Coder("nastya", "f", 100, ["C++"]);
+        let ololosha = new Coder("ololosha", "f", 100, ["C++"]);
+
+        working_day(nastya);
+        working_day(ololosha);
+        working_day(max); */
+
+        // working_day(coders[0]);
     });
 
     // -----------------------------------------------------------------------------------------------------------------

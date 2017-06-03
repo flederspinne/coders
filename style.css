@@ -21,7 +21,8 @@ body {
 #wanna_add_another_human,
 #button_settings,
 #settings_form,
-#button_simulation_start {
+#button_simulation_start,
+#simulation_screen {
     visibility: hidden;
 }
 
@@ -140,5 +141,17 @@ input {
 #add_coder_lang,
 #add_designer_lang {
     width: 30px;
+}
+
+/* Окно симуляции */
+#simulation_log {
+    background: white;
+    font-family: Consolas;
+    font-size: 0.8em;
+    height: 500px;
+    margin: auto;
+    overflow-y: scroll;
+    position: relative;
+    width: 40%;
 }
 

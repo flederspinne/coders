@@ -16,18 +16,27 @@ class Human {
             gender: gender,
             skill: skill,
             specialty: "",
-            cheerfulness: 25
+            cheerfulness: 25,
+            start_day: true
         }
 
         // 1
         this.come_to_office = function() {
-            write_log(this.params.name + " пришёл в офис.");
+            if ("m" == this.params.gender) {
+                write_log(this.params.name + " пришёл в офис.");
+            } else if ("f" == this.params.gender) {
+                write_log(this.params.name + " пришла в офис.");
+            }
             this.params.cheerfulness = 50;
         }
 
         // 2
         this.go_home = function() {
-            write_log(this.params.name + " ушёл домой.");
+            if ("m" == this.params.gender) {
+                write_log(this.params.name + " ушёл домой.");
+            } else if ("f" == this.params.gender) {
+                write_log(this.params.name + " ушла домой.");
+            }
         }
 
         // 3
@@ -43,13 +52,14 @@ class Human {
         }
 
         // 5
+        // Этот метод будет перегружен: разговаривать можно, только если ты не один в офисе.
         this.talk = function() {
             write_log(this.params.name + " разговаривает.");
         }
 
         // 6
         this.read_documentation = function() {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " читает документацию.");
                 this.params.cheerfulness--;
             }
@@ -70,9 +80,17 @@ class Coder extends Human {
         this.params.language = language;
         this.params.specialty = "программист";
 
+        // 5
+        this.talk = function() {
+            if(coders.length >= 2 || testers.length >= 1 || techwriters.length >= 1 ||
+            designers.length >= 1 || managers.length >= 1) {
+                write_log(this.params.name + " разговаривает.");
+            }
+        }
+
         // 7
         this.code = function() {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 let rand_lang = Math.floor(Math.random() * (this.params.language.length));
                 write_log(this.params.name + " программирует на " + this.params.language[rand_lang] + ".");
                 this.params.skill++;
@@ -94,9 +112,17 @@ class Tester extends Human {
         super(name, gender, skill);
         this.params.specialty = "тестировщик";
 
+        // 5
+        this.talk = function() {
+            if(coders.length >= 1 || testers.length >= 2 || techwriters.length >= 1 ||
+                designers.length >= 1 || managers.length >= 1) {
+                write_log(this.params.name + " разговаривает.");
+            }
+        }
+
         // 7
         this.test = function(how) {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 if ("вручную" == how) {
                     write_log(this.params.name + " тестирует продукт " + how + ".");
                 } else if ("автотесты" == how) {
@@ -114,13 +140,9 @@ class Tester extends Human {
 
         // 8
         this.make_testing_method = function() {
-            if (1 <= this.params.cheerfulness) {
-                if (200 <= this.params.skill) {
+            if (this.params.cheerfulness >= 1) {
+                if (this.params.skill >= 200) {
                     write_log(this.params.name + " разрабатывает новую методику тестирования.");
-                } else {
-                    write_log(this.params.name + " предлагает новую методику тестирования, но она неудачная, так как " +
-                        this.params.name + " имеет мало опыта.");
-                    this.params.cheerfulness--;
                 }
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -133,7 +155,7 @@ class Tester extends Human {
 
         // 9
         this.make_testbench = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " собирает испытательный стенд.");
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -153,9 +175,17 @@ class Techwriter extends Human {
         super(name, gender, skill);
         this.params.specialty = "технический писатель";
 
+        // 5
+        this.talk = function() {
+            if(coders.length >= 1 || testers.length >= 1 || techwriters.length >= 2 ||
+                designers.length >= 1 || managers.length >= 1) {
+                write_log(this.params.name + " разговаривает.");
+            }
+        }
+
         // 7
         this.write_documentation = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " пишет документацию.");
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -175,9 +205,17 @@ class Designer extends Coder {
         super(name, gender, skill, language);
         this.params.specialty = "дизайнер";
 
+        // 5
+        this.talk = function() {
+            if(coders.length >= 1 || testers.length >= 1 || techwriters.length >= 1 ||
+                designers.length >= 2 || managers.length >= 1) {
+                write_log(this.params.name + " разговаривает.");
+            }
+        }
+
         // 8
         this.create_design = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " придумывает дизайн продукта.");
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -190,7 +228,7 @@ class Designer extends Coder {
 
         // 9
         this.create_UX = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " проектирует взаимодействие с пользователем.");
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -203,7 +241,7 @@ class Designer extends Coder {
 
         // 10
         this.draw = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " рисует.");
                 this.params.skill++;
                 this.params.cheerfulness--;
@@ -223,6 +261,14 @@ class Manager extends Human {
         super(name, gender, skill);
         this.params.specialty = "менеджер";
 
+        // 5
+        this.talk = function() {
+            if(coders.length >= 1 || testers.length >= 1 || techwriters.length >= 1 ||
+                designers.length >= 1 || managers.length >= 2) {
+                write_log(this.params.name + " разговаривает.");
+            }
+        }
+
         // 7
         this.organize_meeting = function () {
             write_log(this.params.name + " организует совещание.");
@@ -230,7 +276,7 @@ class Manager extends Human {
 
         // 8
         this.communicate_with_customer = function () {
-            if (1 <= this.params.cheerfulness) {
+            if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " общается с заказчиком.");
                 this.params.skill++;
                 this.params.cheerfulness--;

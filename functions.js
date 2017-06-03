@@ -13,8 +13,10 @@ function get_time() {
 }
 
 function write_log(something) {
-    // writeln перестал работать почему-то
-    document.writeln(get_time() + " " + something + "<br>");
+
+    $('#simulation_log').append(get_time() + " " + something + "<br>");
+    document.getElementById('simulation_log').scrollTop = 9999;
+
 }
 
 function do_something(who, what) {
@@ -29,7 +31,9 @@ function do_something(who, what) {
             break;
         }
         case 3: {
-            who.drink("кофе");
+            let drinks = ["чай", "кофе", "какао", "водичку", "сок", "квас"];
+            let rand_drink = Math.round(Math.random() * (drinks.length - 1));
+            who.drink(drinks[rand_drink]);
             break;
         }
         case 4: {
@@ -45,7 +49,41 @@ function do_something(who, what) {
             break;
         }
         case 7: {
-            who.code();
+            if (who instanceof Coder || who instanceof Designer) {
+                who.code();
+            } else if (who instanceof Tester) {
+                let test_methods = ["вручную", "автотесты"];
+                let rand_method = Math.round(Math.random() * (test_methods.length - 1));
+                who.test(test_methods[rand_method]);
+            } else if (who instanceof Techwriter) {
+                who.write_documentation();
+            } else if (who instanceof Manager) {
+                who.organize_meeting();
+            }
+            break;
+        }
+        case 8: {
+            if (who instanceof Tester) {
+                who.make_testing_method();
+            } else if (who instanceof Designer) {
+                who.create_design();
+            } else if (who instanceof Manager) {
+                who.communicate_with_customer();
+            }
+            break;
+        }
+        case 9: {
+            if (who instanceof Tester) {
+                who.make_testbench();
+            } else if (who instanceof Designer) {
+                who.create_UX();
+            }
+            break;
+        }
+        case 10: {
+            if (who instanceof Designer) {
+                who.draw();
+            }
             break;
         }
     }
@@ -54,16 +92,32 @@ function do_something(who, what) {
 function working_day(who) {
     setInterval(function () {
 
-        if (!flag_come) {
+        if (who.params.start_day) {
             do_something(who, 1);
-            flag_come = true;
+            who.params.start_day = false;
         }
 
-        let rand_method = Math.floor(Math.random() * (Object.getOwnPropertyNames(who).length - 2) + 3);
+        let rand_method = Math.round(Math.random() * (Object.getOwnPropertyNames(who).length - 2) + 3);
 
         do_something(who, rand_method);
 
     }, 2000);
+}
+
+function initialize_day_for(who) {
+    if (who.length) {
+        for (let i = 0; i < who.length; i++) {
+            working_day(who[i]);
+        }
+    }
+}
+
+function initialize_day() {
+    initialize_day_for(coders);
+    initialize_day_for(testers);
+    initialize_day_for(techwriters);
+    initialize_day_for(designers);
+    initialize_day_for(managers);
 }
 
 function add_human(who, where, name, gender, skill, language) {
