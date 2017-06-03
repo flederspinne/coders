@@ -17,7 +17,8 @@ class Human {
             skill: skill,
             specialty: "",
             cheerfulness: 25,
-            start_day: true
+            start_day: true,
+            work_interval: 0
         }
 
         // 1

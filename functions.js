@@ -89,8 +89,9 @@ function do_something(who, what) {
     }
 }
 
-function working_day(who) {
-    setInterval(function () {
+function start_working_day(who) {
+    // Идентификатор интервала для каждого конкретного человека хранится в params.work_interval:
+    who.params.work_interval = setInterval(function () {
 
         if (who.params.start_day) {
             do_something(who, 1);
@@ -104,20 +105,54 @@ function working_day(who) {
     }, 2000);
 }
 
-function initialize_day_for(who) {
-    if (who.length) {
-        for (let i = 0; i < who.length; i++) {
-            working_day(who[i]);
+function start_working_day_for(whom) {
+    if (whom.length) {
+        for (let i = 0; i < whom.length; i++) {
+            start_working_day(whom[i]);
         }
     }
 }
 
+function start_working_day_all() {
+    start_working_day_for(coders);
+    start_working_day_for(testers);
+    start_working_day_for(techwriters);
+    start_working_day_for(designers);
+    start_working_day_for(managers);
+}
+
 function initialize_day() {
-    initialize_day_for(coders);
-    initialize_day_for(testers);
-    initialize_day_for(techwriters);
-    initialize_day_for(designers);
-    initialize_day_for(managers);
+    start_working_day_all();
+
+    setTimeout(function () {
+        end_working_day_all();
+    }, 10000);
+}
+
+function end_working_day(who) {
+    if (!who.params.start_day) {
+        do_something(who, 2);
+
+        clearInterval(who.params.work_interval);
+
+        who.params.start_day = true;
+    }
+}
+
+function end_working_day_for(whom) {
+    if (whom.length) {
+        for (let i = 0; i < whom.length; i++) {
+            end_working_day(whom[i]);
+        }
+    }
+}
+
+function end_working_day_all() {
+    end_working_day_for(coders);
+    end_working_day_for(testers);
+    end_working_day_for(techwriters);
+    end_working_day_for(designers);
+    end_working_day_for(managers);
 }
 
 function add_human(who, where, name, gender, skill, language) {
