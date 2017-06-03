@@ -20,7 +20,6 @@ function write_log(something) {
 }
 
 function do_something(who, what) {
-
     switch (what) {
         case 1: {
             who.come_to_office();
@@ -102,7 +101,7 @@ function start_working_day(who) {
 
         do_something(who, rand_method);
 
-    }, 2000);
+    }, 1000);
 }
 
 function start_working_day_for(whom) {
@@ -122,21 +121,36 @@ function start_working_day_all() {
 }
 
 function initialize_day() {
+
     start_working_day_all();
 
     setTimeout(function () {
         end_working_day_all();
-    }, 10000);
+    }, DAY_PERIOD);
+
+    // Для обеспечения правильных интервалов между рабочими днями.
+    // Во всём виновата чёртова асинхронность.
+    for (let i = 0; i < (current_project.planned_time - 1) * 2; i += 2) {
+        setTimeout(function () {
+            start_working_day_all();
+        }, (NIGHT_PERIOD) * (i + 2));
+
+        setTimeout(function () {
+            end_working_day_all();
+        }, DAY_PERIOD + (NIGHT_PERIOD) * (i + 2));
+    }
+
 }
 
 function end_working_day(who) {
-    if (!who.params.start_day) {
-        do_something(who, 2);
 
-        clearInterval(who.params.work_interval);
+    do_something(who, 2);
 
-        who.params.start_day = true;
-    }
+    clearInterval(who.params.work_interval);
+    // who.params.work_interval = Math.round(Math.random() * 99999999999);
+
+    who.params.start_day = true;
+
 }
 
 function end_working_day_for(whom) {
@@ -167,7 +181,7 @@ function add_human(who, where, name, gender, skill, language) {
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
     }
-    // alert(JSON.stringify(where[where.length - 1]));
+    alert(JSON.stringify(where[where.length - 1]));
 
     $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
     $('#wanna_add_another_human').css("visibility", "visible");
@@ -183,6 +197,10 @@ function get_gender() {
     } else if ($('#' + $('#human_selection').val() + '_gender_f').prop("checked")) {
         gender_val = "f";
     }
+}
+
+function increase_project_readiness(skill) {
+    current_project.readiness += Math.floor(skill / 100);
 }
 
 function input_fields_width_align() {

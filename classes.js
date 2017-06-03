@@ -2,6 +2,16 @@
  * Created by Ksenia on 07.05.2017.
  */
 
+class Project {
+
+    constructor(time) {
+        this.planned_time = time;
+        this.readiness = 0;
+        this.emergency = false;
+    }
+
+}
+
 class Human {
 
     constructor(name, gender, skill) {
@@ -67,7 +77,7 @@ class Human {
             else {
                 write_log(this.params.name + " пытается читать документацию, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -94,12 +104,13 @@ class Coder extends Human {
             if (this.params.cheerfulness >= 1) {
                 let rand_lang = Math.floor(Math.random() * (this.params.language.length));
                 write_log(this.params.name + " программирует на " + this.params.language[rand_lang] + ".");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается программировать, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
 
             }
         }
@@ -129,12 +140,13 @@ class Tester extends Human {
                 } else if ("автотесты" == how) {
                     write_log(this.params.name + " пишет " + how + ".");
                 }
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается тестировать продукт, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
 
             }
         }
@@ -145,12 +157,13 @@ class Tester extends Human {
                 if (this.params.skill >= 200) {
                     write_log(this.params.name + " разрабатывает новую методику тестирования.");
                 }
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается разработать новую методику тестирования, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -158,12 +171,13 @@ class Tester extends Human {
         this.make_testbench = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " собирает испытательный стенд.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается собрать стенд, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -188,12 +202,13 @@ class Techwriter extends Human {
         this.write_documentation = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " пишет документацию.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -218,12 +233,13 @@ class Designer extends Coder {
         this.create_design = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " придумывает дизайн продукта.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается придумать дизайн, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -231,12 +247,13 @@ class Designer extends Coder {
         this.create_UX = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " проектирует взаимодействие с пользователем.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается проектировать взаимодействие с пользователем, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -244,12 +261,13 @@ class Designer extends Coder {
         this.draw = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " рисует.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается рисовать, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -273,18 +291,20 @@ class Manager extends Human {
         // 7
         this.organize_meeting = function () {
             write_log(this.params.name + " организует совещание.");
+            current_project.readiness++;
         }
 
         // 8
         this.communicate_with_customer = function () {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " общается с заказчиком.");
+                increase_project_readiness(this.params.skill);
                 this.params.skill++;
                 this.params.cheerfulness--;
             } else {
                 write_log(this.params.name + " пытается общаться с заказчиком, " +
                     "но из-за сильной усталости срывается. Надо сделать перерыв.");
-                do_something(Math.floor(Math.random() * (5 - 3) + 3 ));
+                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }

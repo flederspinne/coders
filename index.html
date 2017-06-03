@@ -18,13 +18,14 @@
         <option value="coder" id="select_coder">Программист</option>
         <option value="tester" id="select_tester">Тестировщик</option>
         <option value="techwriter" id="select_techwriter">Технический писатель</option>
-        <option value="designer" id="select_designer">Дизайнер</option>
+        <option value="designer" id="select_designer">Веб-дизайнер</option>
         <option value="manager" id="select_manager">Менеджер</option>
     </select>
     <button id="submit_choose_human_form" class="button">Выбрать</button>
 </div>
 
 <div id="add_coder_form" class="info_fields">
+    <p class="text_center">Новый программист:</p>
     <div class="add_form_group_span">
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
@@ -47,6 +48,7 @@
 </div>
 
 <div id="add_tester_form" class="info_fields">
+    <p class="text_center">Новый тестировщик:</p>
     <div class="add_form_group_span">
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
@@ -66,6 +68,7 @@
 </div>
 
 <div id="add_techwriter_form" class="info_fields">
+    <p class="text_center">Новый технический писатель:</p>
     <div class="add_form_group_span">
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
@@ -85,6 +88,7 @@
 </div>
 
 <div id="add_designer_form" class="info_fields">
+    <p class="text_center">Новый веб-дизайнер:</p>
     <div class="add_form_group_span">
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
@@ -107,6 +111,7 @@
 </div>
 
 <div id="add_manager_form" class="info_fields">
+    <p class="text_center">Новый менеджер:</p>
     <div class="add_form_group_span">
         <span class="add_form_text">Имя:</span>
         <span class="add_form_text">Пол:</span>
@@ -138,7 +143,7 @@
     <div class="settings_form_group_input">
         <input id="emergency_checkbox" type="checkbox">
         <br>
-        <input type="text" id="time_for_project_input" class="settings_form_input"/>
+        <input type="text" id="time_for_project_input" class="settings_form_input" value="5"/>
         <span class="add_form_text">рабочих дней</span>
     </div>
 </div>
@@ -240,9 +245,14 @@
         $('#button_simulation_start').css("visibility", "hidden");
         $('#simulation_screen').css("visibility", "visible");
 
+        // TODO: Сделать нормальный расчёт!
+        time_for_project = $('#time_for_project_input').val();
+        current_project = new Project(time_for_project);
+
+
         initialize_day();
 
-        let misha = new Tester("Миша", "m", 1000);
+        // let misha = new Tester("Миша", "m", 1000);
         // start_working_day(misha);
 
         /* let max = new Coder("max", "m", 100, ["C++", "C#"]);
