@@ -4,10 +4,11 @@
 
 class Project {
 
-    constructor(time) {
+    constructor(time, difficulty, emergency) {
         this.planned_time = time;
+        this.difficulty = difficulty;
+        this.emergency = emergency;
         this.readiness = 0;
-        this.emergency = false;
     }
 
 }
@@ -58,8 +59,10 @@ class Human {
 
         // 4
         this.laugh = function() {
-            write_log(this.params.name + " смеётся.");
-            this.params.cheerfulness++;
+            if (!current_project.emergency) {
+                write_log(this.params.name + " смеётся.");
+                this.params.cheerfulness++;
+            }
         }
 
         // 5

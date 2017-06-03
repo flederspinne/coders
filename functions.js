@@ -88,6 +88,14 @@ function do_something(who, what) {
     }
 }
 
+function check_project_readiness() {
+    write_log("Проект готов на " + current_project.readiness + "%");
+    if (100 == current_project.readiness) {
+        alert("Yo!");
+        end_working_day_all();
+    }
+}
+
 function start_working_day(who) {
     // Идентификатор интервала для каждого конкретного человека хранится в params.work_interval:
     who.params.work_interval = setInterval(function () {
@@ -100,6 +108,8 @@ function start_working_day(who) {
         let rand_method = Math.round(Math.random() * (Object.getOwnPropertyNames(who).length - 2) + 3);
 
         do_something(who, rand_method);
+
+        check_project_readiness();
 
     }, 1000);
 }
@@ -181,7 +191,7 @@ function add_human(who, where, name, gender, skill, language) {
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
     }
-    alert(JSON.stringify(where[where.length - 1]));
+    // alert(JSON.stringify(where[where.length - 1]));
 
     $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
     $('#wanna_add_another_human').css("visibility", "visible");

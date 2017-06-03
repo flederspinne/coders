@@ -139,12 +139,14 @@
         <label for="emergency_checkbox">Режим аварии</label>
         <br>
         <span class="add_form_text">Время на проект:</span>
+        <span class="add_form_text">Сложность проекта:</span>
     </div>
     <div class="settings_form_group_input">
         <input id="emergency_checkbox" type="checkbox">
         <br>
         <input type="text" id="time_for_project_input" class="settings_form_input" value="5"/>
         <span class="add_form_text">рабочих дней</span>
+        <input type="range" id="project_difficulty" min="0" max="500" step="1" value="250">
     </div>
 </div>
 
@@ -284,25 +286,14 @@
         $('#button_simulation_start').css("visibility", "hidden");
         $('#simulation_screen').css("visibility", "visible");
 
-        // TODO: Сделать нормальный расчёт!
-        time_for_project = $('#time_for_project_input').val();
-        current_project = new Project(time_for_project);
-
+        let time_for_project = $('#time_for_project_input').val();
+        let project_difficulty = $('#project_difficulty').val();
+        let project_emergency = $('#emergency_checkbox').prop("checked");
+        current_project = new Project(time_for_project, project_difficulty, project_emergency);
 
         initialize_day();
+        // alert(JSON.stringify(current_project));
 
-        // let misha = new Tester("Миша", "m", 1000);
-        // start_working_day(misha);
-
-        /* let max = new Coder("max", "m", 100, ["C++", "C#"]);
-        let nastya = new Coder("nastya", "f", 100, ["C++"]);
-        let ololosha = new Coder("ololosha", "f", 100, ["C++"]);
-
-        start_working_day(nastya);
-        start_working_day(ololosha);
-        start_working_day(max); */
-
-        // start_working_day(coders[0]);
     });
 
     // -----------------------------------------------------------------------------------------------------------------
