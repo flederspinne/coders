@@ -20,7 +20,8 @@ body {
 #add_manager_form,
 #wanna_add_another_human,
 #button_settings,
-#settings_form {
+#settings_form,
+#button_simulation_start {
     visibility: hidden;
 }
 
@@ -28,24 +29,20 @@ input {
     cursor: pointer;
 }
 
+.field {
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* Добавление сотрудников */
 .info_fields {
     background: white;
     box-shadow: 0 0 8px rgba(0,0,0,0.5);
-    margin: 20% 0 0 27%;
+    margin: 15% 0 0 27%;
     padding: 3%;
     position: absolute;
     text-align: left;
     width: 40%;
-}
-
-.settings_fields {
-    /* background: white;
-    box-shadow: 0 0 8px rgba(0,0,0,0.5); */
-    border: 1px solid darkred;
-    margin: 10% 0 0 27%;
-    position: absolute;
-    text-align: left;
-    width: 80%;
 }
 
 .add_form_group_span {
@@ -63,11 +60,45 @@ input {
     width: 75%;
 }
 
-.field {
-    cursor: pointer;
-    font-size: 1em;
+.add_form_text {
+    /* border: 1px solid darkred; */
+    line-height: 30px;
+    position: relative;
 }
 
+.add_form_input {
+    margin: 2.5px;
+    position: relative;
+    width: 88%;
+}
+
+/* Предварительные настройки симуляции */
+.settings_fields {
+    margin: 10% 0 0 35%;
+    position: absolute;
+    text-align: left;
+    width: 30%;
+}
+
+.settings_form_group_span {
+    display: inline-block;
+    position: relative;
+    width: 48%;
+}
+
+.settings_form_group_input {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+}
+
+.settings_form_input {
+    margin: 2.5px;
+    position: relative;
+    width: 30%;
+}
+
+/* Текст и названия */
 .text_center {
     font-size: 1.4em;
     margin: 0 0 5% 0;
@@ -75,12 +106,13 @@ input {
 }
 
 .label {
-    margin: 15% 0 0 15%;
+    margin: 10% 0 0 15%;
     position: relative;
     text-align: center;
     width: 70%
 }
 
+/* Кнопки */
 .button {
     background: lightgrey;
     border: none;
@@ -110,14 +142,3 @@ input {
     width: 30px;
 }
 
-.add_form_text {
-    /* border: 1px solid darkred; */
-    line-height: 30px;
-    position: relative;
-}
-
-.add_form_input {
-    margin: 2.5px;
-    position: relative;
-    width: 88%;
-}
