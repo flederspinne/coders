@@ -167,6 +167,7 @@
     // -----------------------------------------------------------------------------------------------------------------
 
     $('#submit_add_coder_form').click(function() {
+
         get_gender();
 
         let coder_lang_arr = [];
@@ -175,21 +176,43 @@
         }
         add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
             coder_lang_arr);
+
+        $('#coder_name').val("");
+        $('#coder_gender_m').prop("checked", false);
+        $('#coder_gender_f').prop("checked", false);
+        $('#coder_skill').val("");
+        $('#coder_lang_0').val("");
+        for (let i = 1; i <= coder_lang_index; i++) {
+            $('#coder_lang_' + i).remove();
+        }
+
+        coder_lang_index = 0;
     });
 
     $('#submit_add_tester_form').click(function() {
         get_gender();
 
         add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
+
+        $('#tester_name').val("");
+        $('#tester_gender_m').prop("checked", false);
+        $('#tester_gender_f').prop("checked", false);
+        $('#tester_skill').val("");
     });
 
     $('#submit_add_techwriter_form').click(function() {
         get_gender();
 
         add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val, $('#techwriter_skill').val());
+
+        $('#techwriter_name').val("");
+        $('#techwriter_gender_m').prop("checked", false);
+        $('#techwriter_gender_f').prop("checked", false);
+        $('#techwriter_skill').val("");
     });
 
     $('#submit_add_designer_form').click(function() {
+
         get_gender();
 
         let designer_lang_arr = [];
@@ -198,12 +221,28 @@
         }
         add_human ("designer", designers, $('#designer_name').val(), gender_val, $('#designer_skill').val(),
             designer_lang_arr);
+
+        $('#designer_name').val("");
+        $('#designer_gender_m').prop("checked", false);
+        $('#designer_gender_f').prop("checked", false);
+        $('#designer_skill').val("");
+        $('#designer_lang_0').val("");
+        for (let i = 1; i <= designer_lang_index; i++) {
+            $('#designer_lang_' + i).remove();
+        }
+
+        designer_lang_index = 0;
     });
 
     $('#submit_add_manager_form').click(function() {
         get_gender();
 
         add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
+
+        $('#manager_name').val("");
+        $('#manager_gender_m').prop("checked", false);
+        $('#manager_gender_f').prop("checked", false);
+        $('#manager_skill').val("");
     });
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -213,7 +252,7 @@
     // для ввода языков, сколько осталось после предыдущего программиста.
     $('#add_coder_lang').click(function () {
         if (coder_lang_index <= 6) {
-            $('#coder_lang_' + coder_lang_index).after("<br><input type=\"text\" id='coder_lang_" +
+            $('#coder_lang_' + coder_lang_index).after("<input type=\"text\" id='coder_lang_" +
                 (coder_lang_index + 1) + "' name=\"lang'\" class=\"add_form_input\"/>");
             coder_lang_index++;
             if (coder_lang_index == 6) {
@@ -223,7 +262,7 @@
     });
 
     $('#add_designer_lang').click(function () {
-        $('#designer_lang_' + designer_lang_index).after("<br><input type=\"text\" id='designer_lang_" +
+        $('#designer_lang_' + designer_lang_index).after("<input type=\"text\" id='designer_lang_" +
             (designer_lang_index + 1) + "' name=\"lang'\" class=\"add_form_input\"/>");
         designer_lang_index++;
     });
