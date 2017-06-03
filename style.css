@@ -38,6 +38,16 @@ input {
     width: 40%;
 }
 
+.settings_fields {
+    /* background: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5); */
+    border: 1px solid darkred;
+    margin: 10% 0 0 27%;
+    position: absolute;
+    text-align: left;
+    width: 80%;
+}
+
 .add_form_group_span {
     position: fixed;
     width: 50px;

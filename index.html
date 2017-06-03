@@ -128,14 +128,16 @@
 
 <button id="button_settings" class="button button_big">Настройки</button>
 
-<div id="settings_form">
-    <input id="emergency_checkbox" type="checkbox">
-    <label for="emergency_checkbox">Режим аварии</label>
-    <br>
-    <span class="add_form_text">Время на проект:</span>
-    <input type="text" id="time_for_project_input" class="add_form_input"/>
-    <span class="add_form_text">рабочих дней</span>
-    <br>
+<div id="settings_form" class="settings_fields">
+    <div class="add_form_group_span">
+        <label for="emergency_checkbox">Режим аварии</label>
+        <span class="add_form_text">Время на проект:</span>
+    </div>
+    <div class="add_form_group_input">
+        <input id="emergency_checkbox" type="checkbox">
+        <input type="text" id="time_for_project_input" class="add_form_input"/>
+        <span class="add_form_text">рабочих дней</span>
+    </div>
     <button id="button_simulation_start" class="button button_big">Начать симуляцию</button>
 </div>
 
@@ -214,6 +216,12 @@
         $('#choose_human_form').css("visibility", "hidden");
         $('#button_settings').css("visibility", "hidden");
         $('#settings_form').css("visibility", "visible");
+    });
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    $('#button_simulation_start').click(function () {
+        document.location.href = "simulation.html";
     });
 
     // -----------------------------------------------------------------------------------------------------------------

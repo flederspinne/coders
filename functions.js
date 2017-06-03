@@ -78,7 +78,7 @@ function add_human(who, where, name, gender, skill, language) {
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
     }
-    alert(JSON.stringify(where[where.length - 1]));
+    // alert(JSON.stringify(where[where.length - 1]));
 
     $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
     $('#wanna_add_another_human').css("visibility", "visible");
