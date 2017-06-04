@@ -86,13 +86,15 @@ function do_something(who, what) {
             break;
         }
     }
-}
 
-function check_project_readiness() {
-    write_log("Проект готов на " + current_project.readiness + "%");
-    if (100 == current_project.readiness) {
-        alert("Yo!");
-        end_working_day_all();
+    if (current_project.readiness >= current_project.difficulty) {
+        write_log("Всем премию!");
+        // Остановка всех таймаутов на странице:
+        var id = window.setTimeout(function() {}, 0);
+
+        while (id--) {
+            window.clearTimeout(id);
+        }
     }
 }
 
@@ -108,8 +110,6 @@ function start_working_day(who) {
         let rand_method = Math.round(Math.random() * (Object.getOwnPropertyNames(who).length - 2) + 3);
 
         do_something(who, rand_method);
-
-        check_project_readiness();
 
     }, 1000);
 }
@@ -138,29 +138,39 @@ function initialize_day() {
         end_working_day_all();
     }, DAY_PERIOD);
 
+    let day_counter = 1;
+
     // Для обеспечения правильных интервалов между рабочими днями.
     // Во всём виновата чёртова асинхронность.
     for (let i = 0; i < (current_project.planned_time - 1) * 2; i += 2) {
+
         setTimeout(function () {
             start_working_day_all();
         }, (NIGHT_PERIOD) * (i + 2));
 
         setTimeout(function () {
             end_working_day_all();
+
+            day_counter++;
+
+            if (day_counter == current_project.planned_time) {
+                if (current_project.readiness < current_project.difficulty) {
+                    write_log("Всех уволить!");
+                } else {
+                    write_log("Закончили в срок!");
+                }
+            }
+
         }, DAY_PERIOD + (NIGHT_PERIOD) * (i + 2));
+
     }
 
 }
 
 function end_working_day(who) {
-
     do_something(who, 2);
-
     clearInterval(who.params.work_interval);
-    // who.params.work_interval = Math.round(Math.random() * 99999999999);
-
     who.params.start_day = true;
-
 }
 
 function end_working_day_for(whom) {
@@ -191,12 +201,6 @@ function add_human(who, where, name, gender, skill, language) {
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
     }
-    // alert(JSON.stringify(where[where.length - 1]));
-
-    $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-    $('#wanna_add_another_human').css("visibility", "visible");
-    $('#choose_human_form').css("visibility", "visible");
-    $('#button_settings').css("visibility", "visible");
 }
 
 function get_gender() {
@@ -210,7 +214,16 @@ function get_gender() {
 }
 
 function increase_project_readiness(skill) {
-    current_project.readiness += Math.floor(skill / 100);
+    let difficulty_percent = current_project.difficulty / 100;
+    let skill_percent = skill;
+    let delta = skill_percent * difficulty_percent
+    if (current_project.readiness + delta <= current_project.difficulty) {
+        current_project.readiness += delta;
+    } else {
+        current_project.readiness = current_project.difficulty;
+        write_log("ВСЁ.");
+    }
+
 }
 
 function input_fields_width_align() {

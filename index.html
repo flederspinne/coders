@@ -39,7 +39,7 @@
             <span class="add_form_text">М</span>
         <input type="radio" id="coder_gender_f" value="f" name="gender" />
             <span class="add_form_text">Ж</span><br>
-        <input type="text" id="coder_skill" name="skill" class="add_form_input"/>
+        <input type="range" id="coder_skill" min="1" max="10" step="1" value="5">
         <input type="text" id="coder_lang_0" name="lang" class="add_form_input"/>
         <button id="add_coder_lang" class="button">+</button>
     </div>
@@ -61,7 +61,7 @@
         <span class="add_form_text">М</span>
         <input type="radio" id="tester_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
-        <input type="text" id="tester_skill" name="skill" class="add_form_input"/>
+        <input type="range" id="tester_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
     <button id="submit_add_tester_form" class="button">Готово</button>
@@ -81,7 +81,7 @@
         <span class="add_form_text">М</span>
         <input type="radio" id="techwriter_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
-        <input type="text" id="techwriter_skill" name="skill" class="add_form_input"/>
+        <input type="range" id="techwriter_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
     <button id="submit_add_techwriter_form" class="button">Готово</button>
@@ -102,7 +102,7 @@
         <span class="add_form_text">М</span>
         <input type="radio" id="designer_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
-        <input type="text" id="designer_skill" name="skill" class="add_form_input"/>
+        <input type="range" id="designer_skill" min="1" max="10" step="1" value="5">
         <input type="text" id="designer_lang_0" name="lang" class="add_form_input"/>
         <button id="add_designer_lang" class="button">+</button>
     </div>
@@ -124,7 +124,7 @@
         <span class="add_form_text">М</span>
         <input type="radio" id="manager_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
-        <input type="text" id="manager_skill" name="skill" class="add_form_input"/>
+        <input type="range" id="manager_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
     <button id="submit_add_manager_form" class="button">Готово</button>
@@ -146,7 +146,7 @@
         <br>
         <input type="text" id="time_for_project_input" class="settings_form_input" value="5"/>
         <span class="add_form_text">рабочих дней</span>
-        <input type="range" id="project_difficulty" min="0" max="500" step="1" value="250">
+        <input type="range" id="project_difficulty" min="100" max="1000" step="100" value="500">
     </div>
 </div>
 
@@ -179,6 +179,12 @@
         add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
             coder_lang_arr);
 
+
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "visible");
+        $('#choose_human_form').css("visibility", "visible");
+        $('#button_settings').css("visibility", "visible");
+
         $('#coder_name').val("");
         $('#coder_gender_m').prop("checked", false);
         $('#coder_gender_f').prop("checked", false);
@@ -196,6 +202,11 @@
 
         add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
 
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "visible");
+        $('#choose_human_form').css("visibility", "visible");
+        $('#button_settings').css("visibility", "visible");
+
         $('#tester_name').val("");
         $('#tester_gender_m').prop("checked", false);
         $('#tester_gender_f').prop("checked", false);
@@ -206,6 +217,11 @@
         get_gender();
 
         add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val, $('#techwriter_skill').val());
+
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "visible");
+        $('#choose_human_form').css("visibility", "visible");
+        $('#button_settings').css("visibility", "visible");
 
         $('#techwriter_name').val("");
         $('#techwriter_gender_m').prop("checked", false);
@@ -224,6 +240,11 @@
         add_human ("designer", designers, $('#designer_name').val(), gender_val, $('#designer_skill').val(),
             designer_lang_arr);
 
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "visible");
+        $('#choose_human_form').css("visibility", "visible");
+        $('#button_settings').css("visibility", "visible");
+
         $('#designer_name').val("");
         $('#designer_gender_m').prop("checked", false);
         $('#designer_gender_f').prop("checked", false);
@@ -241,6 +262,11 @@
 
         add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
 
+        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+        $('#wanna_add_another_human').css("visibility", "visible");
+        $('#choose_human_form').css("visibility", "visible");
+        $('#button_settings').css("visibility", "visible");
+
         $('#manager_name').val("");
         $('#manager_gender_m').prop("checked", false);
         $('#manager_gender_f').prop("checked", false);
@@ -249,9 +275,7 @@
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    // TODO: добавить возможность удалять пустые поля, а то добавляются пустые языки.
-    // TODO: при добавлении следующего программиста остаётся столько же пустых полей
-    // для ввода языков, сколько осталось после предыдущего программиста.
+    // TODO: Добавить возможность удалять пустые поля.
     $('#add_coder_lang').click(function () {
         if (coder_lang_index <= 6) {
             $('#coder_lang_' + coder_lang_index).after("<input type=\"text\" id='coder_lang_" +
