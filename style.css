@@ -142,6 +142,11 @@ input {
     width: 70%
 }
 
+.text_small {
+    font-size: 0.8em;
+    text-align: center;
+}
+
 /* Кнопки */
 .button {
     background: #b7b9b6;
@@ -224,59 +229,65 @@ input {
 }
 
 .dude {
-    height: 85%;
-    margin: 8% 30%;
-    visibility: hidden;
+    height: 90%;
+    margin: 10% 0 0 0;
     transition: all 2s ease-in-out;
-    width: 40%;
+    visibility: hidden;
+    width: 100%;
 }
 
-.fadeIn {
-    animation-name: fadeIn;
-    -webkit-animation-name: fadeIn;
+.dude img {
+    margin: auto 37%;
+    position: relative;
+    width: 25%;
+}
+
+.expandOpen{
+    animation-name: expandOpen;
+    -webkit-animation-name: expandOpen;
 
     animation-duration: 2s;
     -webkit-animation-duration: 2s;
 
-    animation-timing-function: ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
 
     visibility: visible !important;
 }
 
-@keyframes fadeIn {
+@keyframes expandOpen {
     0% {
-        transform: scale(0);
-        opacity: 0.0;
+        transform: scale(1.8);
     }
-    60% {
-        transform: scale(1.1);
+    50% {
+        transform: scale(0.95);
     }
     80% {
-        transform: scale(0.9);
-        opacity: 1;
+        transform: scale(1.05);
+    }
+    90% {
+        transform: scale(0.98);
     }
     100% {
         transform: scale(1);
-        opacity: 1;
     }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes expandOpen {
     0% {
-        -webkit-transform: scale(0);
-        opacity: 0.0;
+        -webkit-transform: scale(1.8);
     }
-    60% {
-        -webkit-transform: scale(1.1);
+    50% {
+        -webkit-transform: scale(0.95);
     }
     80% {
-        -webkit-transform: scale(0.9);
-        opacity: 1;
+        -webkit-transform: scale(1.05);
+    }
+    90% {
+        -webkit-transform: scale(0.98);
     }
     100% {
         -webkit-transform: scale(1);
-        opacity: 1;
     }
 }
 
@@ -290,22 +301,29 @@ input {
     background: #1b2a3e;
 }
 
-#project_progress {
+.progress {
     left: 70%;
     position: absolute;
-    top: 20%;
     width: 27.5%;
 }
 
-#project_progress p {
+.progress p {
     line-height: 15px;
 }
 
-#project_progress_bar {
+.progress_bar {
     border-radius: 2px;
     box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
     height: 28px;
     width: 100%;
+}
+
+#deadline_progress {
+    top: 10%;
+}
+
+#project_progress {
+    top: 20%;
 }
 
 progress::-webkit-progress-bar {

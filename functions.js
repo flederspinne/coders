@@ -140,6 +140,8 @@ function initialize_day() {
 
     let day_counter = 1;
 
+    $('#deadline_progress_bar').prop("value", day_counter);
+
     // Для обеспечения правильных интервалов между рабочими днями.
     // Во всём виновата чёртова асинхронность.
     for (let i = 0; i < (current_project.planned_time - 1) * 2; i += 2) {
@@ -152,6 +154,8 @@ function initialize_day() {
             end_working_day_all();
 
             day_counter++;
+
+            $('#deadline_progress_bar').prop("value", day_counter);
 
             if (day_counter == current_project.planned_time) {
                 if (current_project.readiness < current_project.difficulty) {
@@ -194,33 +198,48 @@ function count_all_people() {
 }
 
 function add_human(who, where, name, gender, skill, language) {
+
+    let current_type = "";
+
     if ("coder" == who) {
         where[where.length] = new Coder(name, gender, skill, language);
         coders[coders.length - 1].params.place_x = workplace_x;
         coders[coders.length - 1].params.place_y = workplace_y;
+        current_type = coders[coders.length - 1].params.specialty;
     } else if ("tester" == who) {
         where[where.length] = new Tester(name, gender, skill);
         testers[testers.length - 1].params.place_x = workplace_x;
         testers[testers.length - 1].params.place_y = workplace_y;
+        current_type = testers[testers.length - 1].params.specialty;
     } else if ("techwriter" == who) {
         where[where.length] = new Techwriter(name, gender, skill);
         techwriters[techwriters.length - 1].params.place_x = workplace_x;
         techwriters[techwriters.length - 1].params.place_y = workplace_y;
+        current_type = techwriters[techwriters.length - 1].params.specialty;
     } else if ("designer" == who) {
         where[where.length] = new Designer(name, gender, skill, language);
         designers[designers.length - 1].params.place_x = workplace_x;
         designers[designers.length - 1].params.place_y = workplace_y;
+        current_type = designers[designers.length - 1].params.specialty;
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
         managers[managers.length - 1].params.place_x = workplace_x;
         managers[managers.length - 1].params.place_y = workplace_y;
+        current_type = managers[managers.length - 1].params.specialty;
     }
 
+    let dude_gender = "";
     if ("m" == gender) {
-        $('#workplace_' + workplace_y + '_' + workplace_x).append("<img src='img/dude.png' class='dude'>");
-    } else {
-        $('#workplace_' + workplace_y + '_' + workplace_x).append("<img src='img/dude_f.png' class='dude'>");
+        dude_gender = "<img src='img/dude.png'>";
+    } else if ("f" == gender) {
+        dude_gender = "<img src='img/dude_f.png'>";
     }
+
+    $('#workplace_' + workplace_y + '_' + workplace_x).append("<div class='dude'>" +
+        "<p class='text_small'>" + current_type + " " + name + "</p>" +
+        "<p id='skill_" + workplace_y + "_" + workplace_x + "' class='text_small'>Опыт: " + skill + "</p>" +
+        "<p id='cheerfulness_" + workplace_y + "_" + workplace_x + "' class='text_small'>Настроение: " + 50 + "</p>" +
+        "<br>" + dude_gender + "</div>");
 
     if (workplace_x < 4) {
         workplace_x++;
@@ -243,6 +262,16 @@ function get_gender() {
     }
 }
 
+function increase_skill(who) {
+    who.params.skill++;
+    $('#skill_' + who.params.place_y + '_' + who.params.place_x).text("Опыт: " + who.params.skill);
+}
+
+function change_cheerfulness(who, how) {
+    who.params.cheerfulness += how;
+    $('#cheerfulness_' + who.params.place_y + '_' + who.params.place_x).text("Настроение: " + who.params.cheerfulness);
+}
+
 function increase_project_readiness(skill) {
     let difficulty_percent = current_project.difficulty / 100;
     let skill_percent = skill;
@@ -251,7 +280,7 @@ function increase_project_readiness(skill) {
         current_project.readiness += delta;
     } else {
         current_project.readiness = current_project.difficulty;
-        write_log("ВСЁ.");
+        write_log("Проект завершён.");
     }
 
     $('#project_progress_bar').prop("value", current_project.readiness);

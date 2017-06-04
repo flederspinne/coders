@@ -43,9 +43,8 @@ class Human {
             }
 
             $('#simulation_office_screen').css("background", "white");
-            // alert($('#simulation_office_screen').css("width") + " " + $('#simulation_office_screen').css("height"));
             $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').removeClass("hide");
-            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("fadeIn");
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("expandOpen");
             $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').css("visibility", "visible");
 
             this.params.cheerfulness = 50;
@@ -59,25 +58,25 @@ class Human {
                 write_log(this.params.name + " ушла домой.");
             }
 
-            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').removeClass("fadeIn");
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').removeClass("expandOpen");
             $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("hide");
             $('#simulation_office_screen').css("background", "#101336");
-            setTimeout(function () {
+            /* setTimeout(function () {
                 $('#simulation_office_screen').css("background", "URL('img/night.jpg')");
-            }, 1000);
+            }, 1000); */
         }
 
         // 3
         this.drink = function(drink) {
             write_log(this.params.name + " пьёт " + drink + ".");
-            this.params.cheerfulness++;
+            change_cheerfulness(this, 1);
         }
 
         // 4
         this.laugh = function() {
             if (!current_project.emergency) {
                 write_log(this.params.name + " смеётся.");
-                this.params.cheerfulness++;
+                change_cheerfulness(this, 1);
             } else {
                 do_something(this, 7);
             }
@@ -93,7 +92,7 @@ class Human {
         this.read_documentation = function() {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " читает документацию.");
-                this.params.cheerfulness--;
+                change_cheerfulness(this, -1);
             }
             else {
                 write_log(this.params.name + " пытается читать документацию, но из-за сильной усталости не может. " +
@@ -110,7 +109,7 @@ class Coder extends Human {
     constructor(name, gender, skill, language) {
         super(name, gender, skill);
         this.params.language = language;
-        this.params.specialty = "программист";
+        this.params.specialty = "Программист";
 
         // 5
         this.talk = function() {
@@ -126,8 +125,8 @@ class Coder extends Human {
                 let rand_lang = Math.floor(Math.random() * (this.params.language.length));
                 write_log(this.params.name + " программирует на " + this.params.language[rand_lang] + ".");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается программировать, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
@@ -143,7 +142,7 @@ class Tester extends Human {
 
     constructor(name, gender, skill) {
         super(name, gender, skill);
-        this.params.specialty = "тестировщик";
+        this.params.specialty = "Тестировщик";
 
         // 5
         this.talk = function() {
@@ -162,8 +161,8 @@ class Tester extends Human {
                     write_log(this.params.name + " пишет " + how + ".");
                 }
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается тестировать продукт, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
@@ -179,8 +178,8 @@ class Tester extends Human {
                     write_log(this.params.name + " разрабатывает новую методику тестирования.");
                 }
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается разработать новую методику тестирования, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -193,8 +192,8 @@ class Tester extends Human {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " собирает испытательный стенд.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается собрать стенд, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -209,7 +208,7 @@ class Techwriter extends Human {
 
     constructor(name, gender, skill) {
         super(name, gender, skill);
-        this.params.specialty = "технический писатель";
+        this.params.specialty = "Технический писатель";
 
         // 5
         this.talk = function() {
@@ -224,8 +223,8 @@ class Techwriter extends Human {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " пишет документацию.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
@@ -240,7 +239,7 @@ class Designer extends Coder {
 
     constructor(name, gender, skill, language) {
         super(name, gender, skill, language);
-        this.params.specialty = "дизайнер";
+        this.params.specialty = "Веб-дизайнер";
 
         // 5
         this.talk = function() {
@@ -255,8 +254,8 @@ class Designer extends Coder {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " придумывает дизайн продукта.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается придумать дизайн, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -269,8 +268,8 @@ class Designer extends Coder {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " проектирует взаимодействие с пользователем.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается проектировать взаимодействие с пользователем, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -283,8 +282,8 @@ class Designer extends Coder {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " рисует.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается рисовать, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
@@ -299,7 +298,7 @@ class Manager extends Human {
 
     constructor(name, gender, skill) {
         super(name, gender, skill);
-        this.params.specialty = "менеджер";
+        this.params.specialty = "Менеджер";
 
         // 5
         this.talk = function() {
@@ -312,7 +311,7 @@ class Manager extends Human {
         // 7
         this.organize_meeting = function () {
             write_log(this.params.name + " организует совещание.");
-            current_project.readiness++;
+            increase_project_readiness(this.params.skill);
         }
 
         // 8
@@ -320,8 +319,8 @@ class Manager extends Human {
             if (this.params.cheerfulness >= 1) {
                 write_log(this.params.name + " общается с заказчиком.");
                 increase_project_readiness(this.params.skill);
-                this.params.skill++;
-                this.params.cheerfulness--;
+                increase_skill(this);
+                change_cheerfulness(this, -1);
             } else {
                 write_log(this.params.name + " пытается общаться с заказчиком, " +
                     "но из-за сильной усталости срывается. Надо сделать перерыв.");

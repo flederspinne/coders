@@ -183,10 +183,15 @@
             <div id="workplace_3_4" class="workplace"></div>
         </div>
     </div>
-    <div id="project_progress">
+    <div id="deadline_progress" class="progress">
+        <p class="add_form_text">Время близится к дедлайну:</p>
+        <br>
+        <progress id="deadline_progress_bar" class="progress_bar" max="100" value="0"></progress>
+    </div>
+    <div id="project_progress" class="progress">
         <p class="add_form_text">Уровень готовности проекта:</p>
         <br>
-        <progress id="project_progress_bar" max="100" value="0"></progress>
+        <progress id="project_progress_bar" class="progress_bar" max="100" value="0"></progress>
     </div>
     <div id="simulation_log"></div>
 </div>
@@ -365,6 +370,7 @@
         current_project = new Project(time_for_project, project_difficulty, project_emergency);
 
         $('#project_progress_bar').prop("max", current_project.difficulty);
+        $('#deadline_progress_bar').prop("max", current_project.planned_time);
 
         // alert($('#project_progress_bar').prop("max"));
 
