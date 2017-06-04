@@ -29,7 +29,9 @@ class Human {
             specialty: "",
             cheerfulness: 25,
             start_day: true,
-            work_interval: 0
+            work_interval: 0,
+            place_x: 0,
+            place_y: 0
         }
 
         // 1
@@ -39,6 +41,13 @@ class Human {
             } else if ("f" == this.params.gender) {
                 write_log(this.params.name + " пришла в офис.");
             }
+
+            $('#simulation_office_screen').css("background", "white");
+            // alert($('#simulation_office_screen').css("width") + " " + $('#simulation_office_screen').css("height"));
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').removeClass("hide");
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("fadeIn");
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').css("visibility", "visible");
+
             this.params.cheerfulness = 50;
         }
 
@@ -49,6 +58,13 @@ class Human {
             } else if ("f" == this.params.gender) {
                 write_log(this.params.name + " ушла домой.");
             }
+
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').removeClass("fadeIn");
+            $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("hide");
+            $('#simulation_office_screen').css("background", "#101336");
+            setTimeout(function () {
+                $('#simulation_office_screen').css("background", "URL('img/night.jpg')");
+            }, 1000);
         }
 
         // 3

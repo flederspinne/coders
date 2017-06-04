@@ -161,9 +161,27 @@
             <div id="workplace_0_3" class="workplace"></div>
             <div id="workplace_0_4" class="workplace"></div>
         </div>
-        <div id="workplace_line_1" class="workplace_line"></div>
-        <div id="workplace_line_2" class="workplace_line"></div>
-        <div id="workplace_line_3" class="workplace_line"></div>
+        <div id="workplace_line_1" class="workplace_line">
+            <div id="workplace_1_0" class="workplace"></div>
+            <div id="workplace_1_1" class="workplace"></div>
+            <div id="workplace_1_2" class="workplace"></div>
+            <div id="workplace_1_3" class="workplace"></div>
+            <div id="workplace_1_4" class="workplace"></div>
+        </div>
+        <div id="workplace_line_2" class="workplace_line">
+            <div id="workplace_2_0" class="workplace"></div>
+            <div id="workplace_2_1" class="workplace"></div>
+            <div id="workplace_2_2" class="workplace"></div>
+            <div id="workplace_2_3" class="workplace"></div>
+            <div id="workplace_2_4" class="workplace"></div>
+        </div>
+        <div id="workplace_line_3" class="workplace_line">
+            <div id="workplace_3_0" class="workplace"></div>
+            <div id="workplace_3_1" class="workplace"></div>
+            <div id="workplace_3_2" class="workplace"></div>
+            <div id="workplace_3_3" class="workplace"></div>
+            <div id="workplace_3_4" class="workplace"></div>
+        </div>
     </div>
     <div id="project_progress">
         <p class="add_form_text">Уровень готовности проекта:</p>
@@ -196,22 +214,28 @@
         add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
             coder_lang_arr);
 
+        if (count_all_people() < 20) {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#wanna_add_another_human').css("visibility", "visible");
+            $('#choose_human_form').css("visibility", "visible");
+            $('#button_settings').css("visibility", "visible");
 
-        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-        $('#wanna_add_another_human').css("visibility", "visible");
-        $('#choose_human_form').css("visibility", "visible");
-        $('#button_settings').css("visibility", "visible");
+            $('#coder_name').val("");
+            $('#coder_gender_m').prop("checked", false);
+            $('#coder_gender_f').prop("checked", false);
+            $('#coder_skill').val("");
+            $('#coder_lang_0').val("");
+            for (let i = 1; i <= coder_lang_index; i++) {
+                $('#coder_lang_' + i).remove();
+            }
 
-        $('#coder_name').val("");
-        $('#coder_gender_m').prop("checked", false);
-        $('#coder_gender_f').prop("checked", false);
-        $('#coder_skill').val("");
-        $('#coder_lang_0').val("");
-        for (let i = 1; i <= coder_lang_index; i++) {
-            $('#coder_lang_' + i).remove();
+            coder_lang_index = 0;
+        } else {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#button_settings').css("visibility", "hidden");
+            $('#settings_form').css("visibility", "visible");
+            $('#button_simulation_start').css("visibility", "visible");
         }
-
-        coder_lang_index = 0;
     });
 
     $('#submit_add_tester_form').click(function() {
@@ -219,15 +243,17 @@
 
         add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
 
-        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-        $('#wanna_add_another_human').css("visibility", "visible");
-        $('#choose_human_form').css("visibility", "visible");
-        $('#button_settings').css("visibility", "visible");
+        if (count_all_people() < 20) {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#wanna_add_another_human').css("visibility", "visible");
+            $('#choose_human_form').css("visibility", "visible");
+            $('#button_settings').css("visibility", "visible");
 
-        $('#tester_name').val("");
-        $('#tester_gender_m').prop("checked", false);
-        $('#tester_gender_f').prop("checked", false);
-        $('#tester_skill').val("");
+            $('#tester_name').val("");
+            $('#tester_gender_m').prop("checked", false);
+            $('#tester_gender_f').prop("checked", false);
+            $('#tester_skill').val("");
+        }
     });
 
     $('#submit_add_techwriter_form').click(function() {
@@ -235,15 +261,17 @@
 
         add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val, $('#techwriter_skill').val());
 
-        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-        $('#wanna_add_another_human').css("visibility", "visible");
-        $('#choose_human_form').css("visibility", "visible");
-        $('#button_settings').css("visibility", "visible");
+        if (count_all_people() < 20) {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#wanna_add_another_human').css("visibility", "visible");
+            $('#choose_human_form').css("visibility", "visible");
+            $('#button_settings').css("visibility", "visible");
 
-        $('#techwriter_name').val("");
-        $('#techwriter_gender_m').prop("checked", false);
-        $('#techwriter_gender_f').prop("checked", false);
-        $('#techwriter_skill').val("");
+            $('#techwriter_name').val("");
+            $('#techwriter_gender_m').prop("checked", false);
+            $('#techwriter_gender_f').prop("checked", false);
+            $('#techwriter_skill').val("");
+        }
     });
 
     $('#submit_add_designer_form').click(function() {
@@ -257,21 +285,23 @@
         add_human ("designer", designers, $('#designer_name').val(), gender_val, $('#designer_skill').val(),
             designer_lang_arr);
 
-        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-        $('#wanna_add_another_human').css("visibility", "visible");
-        $('#choose_human_form').css("visibility", "visible");
-        $('#button_settings').css("visibility", "visible");
+        if (count_all_people() < 20) {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#wanna_add_another_human').css("visibility", "visible");
+            $('#choose_human_form').css("visibility", "visible");
+            $('#button_settings').css("visibility", "visible");
 
-        $('#designer_name').val("");
-        $('#designer_gender_m').prop("checked", false);
-        $('#designer_gender_f').prop("checked", false);
-        $('#designer_skill').val("");
-        $('#designer_lang_0').val("");
-        for (let i = 1; i <= designer_lang_index; i++) {
-            $('#designer_lang_' + i).remove();
+            $('#designer_name').val("");
+            $('#designer_gender_m').prop("checked", false);
+            $('#designer_gender_f').prop("checked", false);
+            $('#designer_skill').val("");
+            $('#designer_lang_0').val("");
+            for (let i = 1; i <= designer_lang_index; i++) {
+                $('#designer_lang_' + i).remove();
+            }
+
+            designer_lang_index = 0;
         }
-
-        designer_lang_index = 0;
     });
 
     $('#submit_add_manager_form').click(function() {
@@ -279,15 +309,17 @@
 
         add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
 
-        $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
-        $('#wanna_add_another_human').css("visibility", "visible");
-        $('#choose_human_form').css("visibility", "visible");
-        $('#button_settings').css("visibility", "visible");
+        if (count_all_people() < 20) {
+            $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
+            $('#wanna_add_another_human').css("visibility", "visible");
+            $('#choose_human_form').css("visibility", "visible");
+            $('#button_settings').css("visibility", "visible");
 
-        $('#manager_name').val("");
-        $('#manager_gender_m').prop("checked", false);
-        $('#manager_gender_f').prop("checked", false);
-        $('#manager_skill').val("");
+            $('#manager_name').val("");
+            $('#manager_gender_m').prop("checked", false);
+            $('#manager_gender_f').prop("checked", false);
+            $('#manager_skill').val("");
+        }
     });
 
     // -----------------------------------------------------------------------------------------------------------------

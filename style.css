@@ -196,13 +196,14 @@ input {
 
 #simulation_office_screen {
     background: white;
-    /* border: 1px solid #A9A9A9; */
+    background-size: 65%;
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     height: 95%;
     left: 2.5%;
     position: absolute;
     top: 2.5%;
+    transition: background 2s ease-in-out;
     width: 65%;
 }
 
@@ -220,6 +221,73 @@ input {
     height: 100%;
     position: relative;
     width: 20%;
+}
+
+.dude {
+    height: 85%;
+    margin: 8% 30%;
+    visibility: hidden;
+    transition: all 2s ease-in-out;
+    width: 40%;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+
+    animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+
+    visibility: visible !important;
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: scale(0);
+        opacity: 0.0;
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    80% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        -webkit-transform: scale(0);
+        opacity: 0.0;
+    }
+    60% {
+        -webkit-transform: scale(1.1);
+    }
+    80% {
+        -webkit-transform: scale(0.9);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+}
+
+.night {
+    background: #1b2a3e;
 }
 
 #project_progress {

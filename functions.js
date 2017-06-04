@@ -189,18 +189,48 @@ function end_working_day_all() {
     end_working_day_for(managers);
 }
 
+function count_all_people() {
+    return(coders.length + testers.length + techwriters.length + designers.length + managers.length);
+}
+
 function add_human(who, where, name, gender, skill, language) {
     if ("coder" == who) {
         where[where.length] = new Coder(name, gender, skill, language);
+        coders[coders.length - 1].params.place_x = workplace_x;
+        coders[coders.length - 1].params.place_y = workplace_y;
     } else if ("tester" == who) {
         where[where.length] = new Tester(name, gender, skill);
+        testers[testers.length - 1].params.place_x = workplace_x;
+        testers[testers.length - 1].params.place_y = workplace_y;
     } else if ("techwriter" == who) {
         where[where.length] = new Techwriter(name, gender, skill);
+        techwriters[techwriters.length - 1].params.place_x = workplace_x;
+        techwriters[techwriters.length - 1].params.place_y = workplace_y;
     } else if ("designer" == who) {
         where[where.length] = new Designer(name, gender, skill, language);
+        designers[designers.length - 1].params.place_x = workplace_x;
+        designers[designers.length - 1].params.place_y = workplace_y;
     } else if ("manager" == who) {
         where[where.length] = new Manager(name, gender, skill);
+        managers[managers.length - 1].params.place_x = workplace_x;
+        managers[managers.length - 1].params.place_y = workplace_y;
     }
+
+    if ("m" == gender) {
+        $('#workplace_' + workplace_y + '_' + workplace_x).append("<img src='img/dude.png' class='dude'>");
+    } else {
+        $('#workplace_' + workplace_y + '_' + workplace_x).append("<img src='img/dude_f.png' class='dude'>");
+    }
+
+    if (workplace_x < 4) {
+        workplace_x++;
+    } else {
+        workplace_x = 0;
+        if (workplace_y < 3) {
+            workplace_y++;
+        }
+    }
+
 }
 
 function get_gender() {

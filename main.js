@@ -15,6 +15,9 @@ let coder_lang_index = 0;
 let designer_lang_index = 0;
 // Пол сотрудника, добавляемого в данный момент:
 let gender_val = "";
+let workplace_x = 0;
+let workplace_y = 0;
+
 
 let current_project = {};
 
