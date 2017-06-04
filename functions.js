@@ -197,6 +197,17 @@ function count_all_people() {
     return(coders.length + testers.length + techwriters.length + designers.length + managers.length);
 }
 
+function show_all_people() {
+    let coders_number = "<p>Число программистов: " + coders.length + "</p>";
+    let testers_number = "<p>Число тестировщиков: " + testers.length + "</p>";
+    let techwriters_number = "<p>Число технических писателей: " + techwriters.length + "</p>";
+    let designers_number = "<p>Число веб-дизайнеров: " + designers.length + "</p>";
+    let managers_number = "<p>Число менеджеров: " + managers.length + "</p>";
+
+    $('#wanna_add_another_human').html("<p>Добавить ещё сотрудника или перейти к настройкам?</p><br>" + coders_number +
+    testers_number + techwriters_number + designers_number + managers_number);
+}
+
 function add_human(who, where, name, gender, skill, language) {
 
     let current_type = "";

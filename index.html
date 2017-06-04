@@ -35,9 +35,9 @@
 
     <div class="add_form_group_input">
         <input type="text" id="coder_name" name="name" class="add_form_input"/><br>
-        <input type="radio" id="coder_gender_m" value="m" name="gender" />
+        <input type="radio" class="radio" id="coder_gender_m" value="m" name="gender" />
             <span class="add_form_text">М</span>
-        <input type="radio" id="coder_gender_f" value="f" name="gender" />
+        <input type="radio" class="radio" id="coder_gender_f" value="f" name="gender" />
             <span class="add_form_text">Ж</span><br>
         <input type="range" id="coder_skill" min="1" max="10" step="1" value="5">
         <input type="text" id="coder_lang_0" name="lang" class="add_form_input"/>
@@ -57,9 +57,9 @@
 
     <div class="add_form_group_input">
         <input type="text" id="tester_name" name="name" class="add_form_input"/><br>
-        <input type="radio" id="tester_gender_m" value="m" name="gender" />
+        <input type="radio" class="radio" id="tester_gender_m" value="m" name="gender" />
         <span class="add_form_text">М</span>
-        <input type="radio" id="tester_gender_f" value="f" name="gender" />
+        <input type="radio" class="radio" id="tester_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
         <input type="range" id="tester_skill" min="1" max="10" step="1" value="5">
     </div>
@@ -77,9 +77,9 @@
 
     <div class="add_form_group_input">
         <input type="text" id="techwriter_name" name="name" class="add_form_input"/><br>
-        <input type="radio" id="techwriter_gender_m" value="m" name="gender" />
+        <input type="radio" class="radio" id="techwriter_gender_m" value="m" name="gender" />
         <span class="add_form_text">М</span>
-        <input type="radio" id="techwriter_gender_f" value="f" name="gender" />
+        <input type="radio" class="radio" id="techwriter_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
         <input type="range" id="techwriter_skill" min="1" max="10" step="1" value="5">
     </div>
@@ -98,9 +98,9 @@
 
     <div class="add_form_group_input">
         <input type="text" id="designer_name" name="name" class="add_form_input"/><br>
-        <input type="radio" id="designer_gender_m" value="m" name="gender" />
+        <input type="radio" class="radio" id="designer_gender_m" value="m" name="gender" />
         <span class="add_form_text">М</span>
-        <input type="radio" id="designer_gender_f" value="f" name="gender" />
+        <input type="radio" class="radio" id="designer_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
         <input type="range" id="designer_skill" min="1" max="10" step="1" value="5">
         <input type="text" id="designer_lang_0" name="lang" class="add_form_input"/>
@@ -120,9 +120,9 @@
 
     <div class="add_form_group_input">
         <input type="text" id="manager_name" name="name" class="add_form_input"/><br>
-        <input type="radio" id="manager_gender_m" value="m" name="gender" />
+        <input type="radio" class="radio" id="manager_gender_m" value="m" name="gender" />
         <span class="add_form_text">М</span>
-        <input type="radio" id="manager_gender_f" value="f" name="gender" />
+        <input type="radio" class="radio" id="manager_gender_f" value="f" name="gender" />
         <span class="add_form_text">Ж</span><br>
         <input type="range" id="manager_skill" min="1" max="10" step="1" value="5">
     </div>
@@ -130,15 +130,17 @@
     <button id="submit_add_manager_form" class="button button_ok">Готово</button>
 </div>
 
-<p id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или перейти к настройкам?</p>
+<div id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или перейти к настройкам?</div>
 
 <button id="button_settings" class="button button_big">Настройки</button>
 
 <div id="settings_form" class="settings_fields">
+    <p class="text_center">Настройки:</p>
     <div class="settings_form_group_span">
-        <label for="emergency_checkbox">Режим аварии</label>
+        <span class="add_form_text">Режим аварии:</span>
         <br>
         <span class="add_form_text">Время на проект:</span>
+        <br>
         <span class="add_form_text">Сложность проекта:</span>
     </div>
     <div class="settings_form_group_input">
@@ -218,6 +220,8 @@
         }
         add_human ("coder", coders, $('#coder_name').val(), gender_val, $('#coder_skill').val(),
             coder_lang_arr);
+
+        show_all_people();
 
         if (count_all_people() < 20) {
             $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");

@@ -94,8 +94,63 @@ input {
     height: 28px;
     outline: none;
     margin: 0 2.5px;
+    padding: 0 0 0 5px;
     position: relative;
     width: 88%;
+}
+
+input[type=range] {
+    background: none;
+    height: 38px;
+    position: relative;
+    top: -5px;
+        -webkit-appearance: none;
+    width: 89.5%;
+}
+
+.settings_fields input[type=range] {
+    left: 1px;
+    top: 5px;
+    width: 95%;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    animate: 0.2s;
+    background: #ebebeb;
+    border-radius: 2px;
+    border: 1px solid #A9A9A9;
+    cursor: pointer;
+    height: 28px;
+    width: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: #afa39e;
+    border: 1px solid #918680;
+    border-radius: 2px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    cursor: pointer;
+    height: 32px;
+    margin-top: -3px;
+        -webkit-appearance: none;
+    width: 16px;
+}
+
+.radio {
+    vertical-align: top;
+    height: 20px;
+    margin: 5px 3px 0 0;
+    outline: none;
+    width: 20px;
+}
+
+.radio:not(checked) + label {
+    position: relative;
+    padding: 0 0 0 25px;
 }
 
 /* Предварительные настройки симуляции */
@@ -103,7 +158,7 @@ input {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    margin: 5% 0 0 32.5%;
+    margin: -5% 0 0 32.5%;
     padding: 3% 3% 2% 3%;
     position: absolute;
     text-align: left;
@@ -112,20 +167,36 @@ input {
 
 .settings_form_group_span {
     display: inline-block;
+    line-height: 35px;
     position: relative;
-    width: 48%;
+    top: 5px;
+    width: 40%;
 }
 
 .settings_form_group_input {
     display: inline-block;
     position: relative;
-    width: 50%;
+    width: 58%;
 }
 
 .settings_form_input {
-    margin: 2.5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
+    height: 28px;
+    margin: 0 0 0 2.5px;
+    outline: none;
+    padding: 0 0 0 5px;
     position: relative;
+    top: 5px;
     width: 30%;
+}
+
+input[type=checkbox] {
+    height: 24px;
+    outline: none;
+    position: relative;
+    top: 2px;
+    width: 24px;
 }
 
 /* Текст и названия */
@@ -145,6 +216,11 @@ input {
 .text_small {
     font-size: 0.8em;
     text-align: center;
+}
+
+#wanna_add_another_human {
+    margin: 5% 25%;
+    width: 50%;
 }
 
 /* Кнопки */
@@ -178,14 +254,14 @@ input {
 
 .button_big {
     height: 10%;
-    margin: 20% 0 0 40%;
+    margin: 15% 0 0 40%;
     position: absolute;
     width: 20%;
 }
 
 #add_coder_lang,
 #add_designer_lang {
-    left: 10px;
+    left: 5px;
     width: 30px;
 }
 
