@@ -1,12 +1,26 @@
 *,
 html {
-    color: #3a2223;
-    font: 12pt "Verdana";
+    color: #202125;
+    font: 10pt "Verdana";
     overflow: hidden;
 }
 
+/*
+    #858784
+    #202125
+    #C4C4C6
+
+    #BEB1A9
+    #677365
+    #23262B
+*/
+
 body {
-    background-image: url("img/cubic.jpg");
+    background: url("img/office.jpg") no-repeat;
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
 }
 
 #choose_human_form {
@@ -37,13 +51,18 @@ input {
 
 /* Добавление сотрудников */
 .info_fields {
-    background: white;
-    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin: 15% 0 0 27%;
-    padding: 3%;
+    padding: 3% 2% 1.5% 3%;
     position: absolute;
     text-align: left;
     width: 40%;
+}
+
+#choose_human_form {
+    padding: 3%;
 }
 
 .add_form_group_span {
@@ -58,24 +77,34 @@ input {
 }
 
 .choose_human_form_input {
-    width: 75%;
+    border-radius: 2px;
+    height: 30px;
+    outline: none;
+    width: 74%;
 }
 
 .add_form_text {
-    /* border: 1px solid darkred; */
     line-height: 30px;
     position: relative;
 }
 
 .add_form_input {
-    margin: 2.5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
+    height: 28px;
+    outline: none;
+    margin: 0 2.5px;
     position: relative;
     width: 88%;
 }
 
 /* Предварительные настройки симуляции */
 .settings_fields {
-    margin: 5% 0 0 35%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 5% 0 0 32.5%;
+    padding: 3% 3% 2% 3%;
     position: absolute;
     text-align: left;
     width: 30%;
@@ -115,20 +144,31 @@ input {
 
 /* Кнопки */
 .button {
-    background: lightgrey;
-    border: none;
+    background: #b7b9b6;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
     cursor: pointer;
     height: 30px;
+    position: relative;
     outline: none;
-    width: 23.5%;
+    width: 24%;
 }
 
 .button:hover {
-    background: #af9a9a;
+    border: 1px solid #918680;
+    background: #afa39e;
 }
 
 .button:active {
-    box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+}
+
+.button_select {
+    left: 10px;
+}
+
+.button_ok {
+    margin: 0 0 0 38%;
 }
 
 .button_big {
@@ -140,18 +180,87 @@ input {
 
 #add_coder_lang,
 #add_designer_lang {
+    left: 10px;
     width: 30px;
 }
 
 /* Окно симуляции */
-#simulation_log {
+#simulation_screen {
+    background: rgba(255, 255, 255, 0.8);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#simulation_office_screen {
     background: white;
+    /* border: 1px solid #A9A9A9; */
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    height: 95%;
+    left: 2.5%;
+    position: absolute;
+    top: 2.5%;
+    width: 65%;
+}
+
+.workplace_line {
+    /* background: rgba(128, 128, 128, 0.2); */
+    height: 25%;
+    position: relative;
+    width: 100%;
+}
+
+.workplace {
+    /* background: rgba(128, 128, 128, 0.2); */
+    display: inline-block;
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 20%;
+}
+
+#project_progress {
+    left: 70%;
+    position: absolute;
+    top: 20%;
+    width: 27.5%;
+}
+
+#project_progress p {
+    line-height: 15px;
+}
+
+#project_progress_bar {
+    border-radius: 2px;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
+    height: 28px;
+    width: 100%;
+}
+
+progress::-webkit-progress-bar {
+    background-color: white;
+    border: 1px solid #A9A9A9;
+}
+progress::-webkit-progress-value {
+    background: #afa39e;
+    box-shadow: 1px 0 2px rgba(0,0,0,0.1);
+}
+
+#simulation_log {
+    background: #c7c7cd;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
     font-family: Consolas;
     font-size: 0.8em;
-    height: 500px;
-    margin: auto;
+    height: 60%;
+    left: 70%;
     overflow-y: scroll;
-    position: relative;
-    width: 40%;
+    padding: 1%;
+    position: absolute;
+    top: 33%;
+    width: 25.5%;
 }
 

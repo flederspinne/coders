@@ -21,7 +21,7 @@
         <option value="designer" id="select_designer">Веб-дизайнер</option>
         <option value="manager" id="select_manager">Менеджер</option>
     </select>
-    <button id="submit_choose_human_form" class="button">Выбрать</button>
+    <button id="submit_choose_human_form" class="button button_select">Выбрать</button>
 </div>
 
 <div id="add_coder_form" class="info_fields">
@@ -44,7 +44,7 @@
         <button id="add_coder_lang" class="button">+</button>
     </div>
     <br>
-    <button id="submit_add_coder_form" class="button">Готово</button>
+    <button id="submit_add_coder_form" class="button button_ok">Готово</button>
 </div>
 
 <div id="add_tester_form" class="info_fields">
@@ -64,7 +64,7 @@
         <input type="range" id="tester_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
-    <button id="submit_add_tester_form" class="button">Готово</button>
+    <button id="submit_add_tester_form" class="button button_ok">Готово</button>
 </div>
 
 <div id="add_techwriter_form" class="info_fields">
@@ -84,7 +84,7 @@
         <input type="range" id="techwriter_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
-    <button id="submit_add_techwriter_form" class="button">Готово</button>
+    <button id="submit_add_techwriter_form" class="button button_ok">Готово</button>
 </div>
 
 <div id="add_designer_form" class="info_fields">
@@ -107,7 +107,7 @@
         <button id="add_designer_lang" class="button">+</button>
     </div>
     <br>
-    <button id="submit_add_designer_form" class="button">Готово</button>
+    <button id="submit_add_designer_form" class="button button_ok">Готово</button>
 </div>
 
 <div id="add_manager_form" class="info_fields">
@@ -127,7 +127,7 @@
         <input type="range" id="manager_skill" min="1" max="10" step="1" value="5">
     </div>
     <br>
-    <button id="submit_add_manager_form" class="button">Готово</button>
+    <button id="submit_add_manager_form" class="button button_ok">Готово</button>
 </div>
 
 <p id="wanna_add_another_human" class="text label">Добавить ещё сотрудника или перейти к настройкам?</p>
@@ -153,6 +153,23 @@
 <button id="button_simulation_start" class="button button_big">Начать симуляцию</button>
 
 <div id="simulation_screen">
+    <div id="simulation_office_screen">
+        <div id="workplace_line_0" class="workplace_line">
+            <div id="workplace_0_0" class="workplace"></div>
+            <div id="workplace_0_1" class="workplace"></div>
+            <div id="workplace_0_2" class="workplace"></div>
+            <div id="workplace_0_3" class="workplace"></div>
+            <div id="workplace_0_4" class="workplace"></div>
+        </div>
+        <div id="workplace_line_1" class="workplace_line"></div>
+        <div id="workplace_line_2" class="workplace_line"></div>
+        <div id="workplace_line_3" class="workplace_line"></div>
+    </div>
+    <div id="project_progress">
+        <p class="add_form_text">Уровень готовности проекта:</p>
+        <br>
+        <progress id="project_progress_bar" max="100" value="0"></progress>
+    </div>
     <div id="simulation_log"></div>
 </div>
 
@@ -315,6 +332,10 @@
         let project_emergency = $('#emergency_checkbox').prop("checked");
         current_project = new Project(time_for_project, project_difficulty, project_emergency);
 
+        $('#project_progress_bar').prop("max", current_project.difficulty);
+
+        // alert($('#project_progress_bar').prop("max"));
+
         initialize_day();
         // alert(JSON.stringify(current_project));
 
@@ -323,11 +344,10 @@
     // -----------------------------------------------------------------------------------------------------------------
 
     $(document).ready(function () {
-        input_fields_width_align();
     });
 
     $(window).resize(function () {
-        input_fields_width_align();
+        alert("Не делай этого!");
     });
 
 </script>
