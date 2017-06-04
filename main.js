@@ -23,8 +23,8 @@ let current_project = {};
 
 
 // Время в миллисекундах, выделяемое на день и ночь:
-const DAY_PERIOD = 5000; // 24000
-const NIGHT_PERIOD = 5000; // 6000
+const DAY_PERIOD = 20000;
+const NIGHT_PERIOD = 5000;
 
 // Почему-то человек приходит в офис, но потом логи переписываются заново, это происходит только при вызове
 // setTimeout и setInterval.

@@ -66,6 +66,7 @@ input {
 }
 
 .add_form_group_span {
+    line-height: 32px;
     position: fixed;
     width: 50px;
 }

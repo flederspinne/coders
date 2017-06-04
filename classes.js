@@ -47,7 +47,7 @@ class Human {
             $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').addClass("expandOpen");
             $('#workplace_' + this.params.place_y + '_' + this.params.place_x + ' .dude').css("visibility", "visible");
 
-            this.params.cheerfulness = 50;
+            this.params.cheerfulness = 25;
         }
 
         // 2

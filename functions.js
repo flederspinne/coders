@@ -89,6 +89,7 @@ function do_something(who, what) {
 
     if (current_project.readiness >= current_project.difficulty) {
         write_log("Всем премию!");
+        alert("Команда закончила проект раньше срока!\nВсем премию!");
         // Остановка всех таймаутов на странице:
         var id = window.setTimeout(function() {}, 0);
 
@@ -131,7 +132,7 @@ function start_working_day_all() {
 }
 
 function initialize_day() {
-
+    // 1 день
     start_working_day_all();
 
     setTimeout(function () {
@@ -144,11 +145,11 @@ function initialize_day() {
 
     // Для обеспечения правильных интервалов между рабочими днями.
     // Во всём виновата чёртова асинхронность.
-    for (let i = 0; i < (current_project.planned_time - 1) * 2; i += 2) {
+    for (let i = 1; i < current_project.planned_time; i++) {
 
         setTimeout(function () {
             start_working_day_all();
-        }, (NIGHT_PERIOD) * (i + 2));
+        }, (DAY_PERIOD * i + NIGHT_PERIOD * i));
 
         setTimeout(function () {
             end_working_day_all();
@@ -160,12 +161,14 @@ function initialize_day() {
             if (day_counter == current_project.planned_time) {
                 if (current_project.readiness < current_project.difficulty) {
                     write_log("Всех уволить!");
+                    alert("Команда не справилась в срок!\nВсех уволить!");
                 } else {
                     write_log("Закончили в срок!");
+                    alert("Команда закончила ровно в срок!")
                 }
             }
 
-        }, DAY_PERIOD + (NIGHT_PERIOD) * (i + 2));
+        }, (DAY_PERIOD * (i + 1) + NIGHT_PERIOD * i));
 
     }
 
@@ -249,7 +252,7 @@ function add_human(who, where, name, gender, skill, language) {
     $('#workplace_' + workplace_y + '_' + workplace_x).append("<div class='dude'>" +
         "<p class='text_small'>" + current_type + " " + name + "</p>" +
         "<p id='skill_" + workplace_y + "_" + workplace_x + "' class='text_small'>Опыт: " + skill + "</p>" +
-        "<p id='cheerfulness_" + workplace_y + "_" + workplace_x + "' class='text_small'>Настроение: " + 50 + "</p>" +
+        "<p id='cheerfulness_" + workplace_y + "_" + workplace_x + "' class='text_small'>Настроение: " + 25 + "</p>" +
         "<br>" + dude_gender + "</div>");
 
     if (workplace_x < 4) {

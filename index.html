@@ -148,7 +148,7 @@
         <br>
         <input type="text" id="time_for_project_input" class="settings_form_input" value="5"/>
         <span class="add_form_text">рабочих дней</span>
-        <input type="range" id="project_difficulty" min="100" max="1000" step="100" value="500">
+        <input type="range" id="project_difficulty" min="100" max="10000" step="100" value="5000">
     </div>
 </div>
 
@@ -252,6 +252,8 @@
 
         add_human ("tester", testers, $('#tester_name').val(), gender_val, $('#tester_skill').val());
 
+        show_all_people();
+
         if (count_all_people() < 20) {
             $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
             $('#wanna_add_another_human').css("visibility", "visible");
@@ -269,6 +271,8 @@
         get_gender();
 
         add_human ("techwriter", techwriters, $('#techwriter_name').val(), gender_val, $('#techwriter_skill').val());
+
+        show_all_people();
 
         if (count_all_people() < 20) {
             $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
@@ -294,6 +298,8 @@
         add_human ("designer", designers, $('#designer_name').val(), gender_val, $('#designer_skill').val(),
             designer_lang_arr);
 
+        show_all_people();
+
         if (count_all_people() < 20) {
             $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
             $('#wanna_add_another_human').css("visibility", "visible");
@@ -317,6 +323,8 @@
         get_gender();
 
         add_human ("manager", managers, $('#manager_name').val(), gender_val, $('#manager_skill').val());
+
+        show_all_people();
 
         if (count_all_people() < 20) {
             $('#add_' + $('#human_selection').val() + '_form').css("visibility", "hidden");
