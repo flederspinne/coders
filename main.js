@@ -16,8 +16,8 @@ let designer_lang_index = 0;
 // Пол сотрудника, добавляемого в данный момент:
 let gender_val = "";
 
-// let time_for_project = 0;
 let current_project = {};
+
 
 // Время в миллисекундах, выделяемое на день и ночь:
 const DAY_PERIOD = 5000; // 24000

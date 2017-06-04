@@ -62,6 +62,8 @@ class Human {
             if (!current_project.emergency) {
                 write_log(this.params.name + " смеётся.");
                 this.params.cheerfulness++;
+            } else {
+                do_something(this, 7);
             }
         }
 
@@ -80,7 +82,7 @@ class Human {
             else {
                 write_log(this.params.name + " пытается читать документацию, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -113,7 +115,7 @@ class Coder extends Human {
             } else {
                 write_log(this.params.name + " пытается программировать, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
 
             }
         }
@@ -149,7 +151,7 @@ class Tester extends Human {
             } else {
                 write_log(this.params.name + " пытается тестировать продукт, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
 
             }
         }
@@ -166,7 +168,7 @@ class Tester extends Human {
             } else {
                 write_log(this.params.name + " пытается разработать новую методику тестирования, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -180,7 +182,7 @@ class Tester extends Human {
             } else {
                 write_log(this.params.name + " пытается собрать стенд, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -211,7 +213,7 @@ class Techwriter extends Human {
             } else {
                 write_log(this.params.name + " пытается писать документ, но из-за сильной усталости не может. " +
                     "Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -242,7 +244,7 @@ class Designer extends Coder {
             } else {
                 write_log(this.params.name + " пытается придумать дизайн, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -256,7 +258,7 @@ class Designer extends Coder {
             } else {
                 write_log(this.params.name + " пытается проектировать взаимодействие с пользователем, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
 
@@ -270,7 +272,7 @@ class Designer extends Coder {
             } else {
                 write_log(this.params.name + " пытается рисовать, " +
                     "но из-за сильной усталости не может. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
@@ -307,7 +309,7 @@ class Manager extends Human {
             } else {
                 write_log(this.params.name + " пытается общаться с заказчиком, " +
                     "но из-за сильной усталости срывается. Надо сделать перерыв.");
-                do_something(Math.round(Math.random() * (5 - 3) + 3 ));
+                do_something(this, Math.round(Math.random() * (5 - 3) + 3 ));
             }
         }
     }
